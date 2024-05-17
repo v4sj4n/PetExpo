@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { PetCard } from "../components/PetCard";
 
 export default function PetCategory() {
   const [animalArray, setAnimalArray] = useState([]);
@@ -45,12 +46,12 @@ export default function PetCategory() {
   }
   return (
     <div>
-      <h1>{petCategory}</h1>
-      <ul>
+      <h1 className="text-4xl text-white text-center my-10 uppercase">
+        {petCategory}
+      </h1>
+      <ul className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-8 w-3/4 mx-auto">
         {animalArray.map((animal: any) => (
-          <li key={animal.id} className="text-white">
-            {animal.name}
-          </li>
+          <PetCard key={animal.id} animal={animal} />
         ))}
       </ul>
     </div>
