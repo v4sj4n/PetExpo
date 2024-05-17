@@ -20,7 +20,6 @@ export default function PetCategory() {
           const res = await fetch(
             `https://freetestapi.com/api/v1/${petCategory}`
           );
-          console.log(res);
           const data = await res.json();
           setAnimalArray(data);
           setLoading(false);
@@ -36,8 +35,6 @@ export default function PetCategory() {
     }
   }, [petCategory]);
 
-  console.log(petCategory);
-
   if (loading) {
     return <div className="text-white">Loading...</div>;
   }
@@ -51,7 +48,7 @@ export default function PetCategory() {
       </h1>
       <ul className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-8 w-3/4 mx-auto">
         {animalArray.map((animal: any) => (
-          <PetCard key={animal.id} animal={animal} />
+          <PetCard key={animal.id} animal={animal} animalType={petCategory!} />
         ))}
       </ul>
     </div>
