@@ -1,9 +1,10 @@
 import { FaPaw } from "react-icons/fa";
 import { PiBirdFill, PiCatFill, PiDogFill } from "react-icons/pi";
+import { motion } from "framer-motion";
 
 export default function App() {
   const animalCategoryClass =
-    "w-full p-8 bg-rose-200 rounded-lg flex flex-col items-center justify-center";
+    "w-full p-8 bg-rose-200 hover:bg-rose-300 rounded-lg flex flex-col items-center justify-center";
   return (
     <main className="flex flex-col items-center mt-10 md:mt-20 md:w-3/4 mx-6 md:mx-auto">
       <h1 className="flex text-balance items-center gap-2 flex-col md:flex-row md:gap-6 text-4xl text-center  md:text-5xl mb-6 text-zinc-100">
@@ -15,27 +16,60 @@ export default function App() {
         below and start exploring your favorite pets with details and images.
       </p>
 
-      <div className="grid grid-cols-2 gap-3 w-full mb-8">
-        <a href="/pets/dogs">
-          <div className={animalCategoryClass}>
+      <motion.div
+        initial="initial"
+        animate="animate"
+        transition={{
+          staggerChildren: 0.5,
+        }}
+        className="grid grid-cols-2 gap-3 w-full mb-8"
+      >
+        <motion.div
+          initial={{ scale: 0, x: -100, opacity: 0 }}
+          animate={{ scale: 1, x: 0, opacity: 1 }}
+          whileHover={{
+            rotate: "-2deg",
+            scale: 1.1,
+            zIndex: 99,
+          }}
+          className={animalCategoryClass}
+        >
+          <a href="/pets/dogs">
             <PiDogFill className="size-20 md:size-36" />
             <h3>dogs.</h3>
-          </div>
-        </a>
-        <a href="/pets/cats">
-          <div className={animalCategoryClass}>
+          </a>
+        </motion.div>
+        <motion.div
+          initial={{ scale: 0, x: 100, opacity: 0 }}
+          animate={{ scale: 1, x: 0, opacity: 1 }}
+          whileHover={{
+            rotate: "2deg",
+            scale: 1.1,
+            zIndex: 99,
+          }}
+          className={animalCategoryClass}
+        >
+          <a href="/pets/cats">
             <PiCatFill className="size-20 md:size-36" />
 
             <h3>cats.</h3>
-          </div>
-        </a>
-        <a href="/pets/birds" className="col-span-2 ">
-          <div className={animalCategoryClass}>
+          </a>
+        </motion.div>
+        <motion.div
+          initial={{ scale: 0, y: -100, opacity: 0 }}
+          animate={{ scale: 1, y: 0, opacity: 1 }}
+          whileHover={{
+            scale: 1.05,
+            zIndex: 99,
+          }}
+          className={`${animalCategoryClass} col-span-2`}
+        >
+          <a href="/pets/birds">
             <PiBirdFill className="size-20 md:size-36" />
             <h3>birds.</h3>
-          </div>
-        </a>
-      </div>
+          </a>
+        </motion.div>
+      </motion.div>
     </main>
   );
 }

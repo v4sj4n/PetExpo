@@ -5,6 +5,7 @@ import PetCategory from "./pages/PetCategory";
 import "./index.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Navbar } from "./components/Navbar";
+import Error from "./pages/Error";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -13,7 +14,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <Routes>
         <Route path="/" index element={<App />} />
         <Route path="/pets/:petCategory" element={<PetCategory />} />
-        <Route path="*" element={<App />} />
+        <Route path="*" element={<Error />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

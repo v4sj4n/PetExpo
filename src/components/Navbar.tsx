@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import { LuDog, LuCat, LuBird } from "react-icons/lu";
+import { motion, AnimatePresence } from "framer-motion";
 
 export const Navbar = () => {
   const [isAnimalToggleOpen, setIsAnimalToggleOpen] = useState(false);
@@ -12,15 +13,21 @@ export const Navbar = () => {
       </a>
       <ul className="flex gap-2">
         <li>
-          <span className="flex items-center cursor-pointer" onClick={handleAnimalToggle}>
+          <span
+            className="flex items-center cursor-pointer"
+            onClick={handleAnimalToggle}
+          >
             <button>pets</button>
-            {!isAnimalToggleOpen ? (
-              <IoMdArrowDropdown  />
-            ) : (
-              <IoMdArrowDropup />
-            )}
+            {!isAnimalToggleOpen ? <IoMdArrowDropdown /> : <IoMdArrowDropup />}
           </span>
-          <div
+
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{
+              opacity: isAnimalToggleOpen ? 1 : 0,
+              y: isAnimalToggleOpen ? 0 : -10,
+            }}
+            transition={{ duration: 0.2 }}
             className={`absolute mt-2 ${
               isAnimalToggleOpen ? "" : "hidden"
             } bg-red-50 py-2 px-4 mr-2 rounded-md `}
@@ -54,7 +61,7 @@ export const Navbar = () => {
                 </a>
               </li>
             </ul>
-          </div>
+          </motion.div>
         </li>
         <li>
           <a href="/contact">contact</a>

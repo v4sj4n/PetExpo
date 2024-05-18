@@ -9,6 +9,7 @@ import {
 import { FaTree, FaKiwiBird } from "react-icons/fa";
 import { GiForkKnifeSpoon } from "react-icons/gi";
 import { IoMdClock } from "react-icons/io";
+import { motion } from "framer-motion";
 
 export const PetCard = ({
   animal,
@@ -19,7 +20,7 @@ export const PetCard = ({
 }) => {
   const [showFullCard, setShowFullCard] = useState(false);
   return (
-    <div className="rounded-xl overflow-hidden">
+    <motion.div className="rounded-xl overflow-hidden">
       <img 
       src={`${
         animalType === "dogs"
@@ -50,7 +51,7 @@ export const PetCard = ({
           closeCard={() => setShowFullCard((prev) => !prev)}
         />
       )}
-    </div>
+    </motion.div>
   );
 };
 
@@ -65,12 +66,14 @@ const FullPetCard = ({
 }) => {
   console.log(animal);
   return (
-    <div
+    <motion.div
+    initial={{ opacity: 0, y: -100 }}
+    animate={{ opacity: 1, y: 0 }}
       className="fixed top-0 left-0 h-screen w-full bg-transparent z-0"
       onClick={closeCard}
     >
       <div
-        className="fixed z-50 backdrop-blur-md rounded-xl bg-zinc-800 md:w-3/12 top-20 left-0 right-0 md:mx-auto pt-4 pb-6 px-6 mx-4"
+        className="fixed z-50 backdrop-blur-md rounded-xl bg-zinc-800 md:w-4/12 top-20 left-0 right-0 md:mx-auto pt-4 pb-6 px-6 mx-4"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex justify-end items-center text-2xl mb-2 text-white">
@@ -176,6 +179,6 @@ const FullPetCard = ({
           </div>
         </div>
       </div>
-    </div>
+    </  motion.div>
   );
 };
