@@ -9,7 +9,15 @@ export default function App() {
     <main className="flex flex-col items-center mt-10 md:mt-20 md:w-3/4 mx-6 md:mx-auto">
       <h1 className="flex text-balance items-center gap-2 flex-col md:flex-row md:gap-6 text-4xl text-center  md:text-5xl mb-6 text-zinc-100">
         Welcome to our pet universe
-        <FaPaw className="rotate-[22.5deg]  text-rose-200" />
+        <motion.div
+  whileHover={{
+    rotate: [0, 30, -30, 0],
+    transition: { duration: 2, repeat: Infinity, ease: "linear" }
+  }}
+        >
+
+        <FaPaw className="rotate-[22.5deg]  text-rose-200 hover:text-rose-300" />
+        </motion.div>
       </h1>
       <p className=" text-lg text-center text-zinc-200/75 leading-6 mb-10">
         Welcome to the pet world of your dreams, pick one of the categories
