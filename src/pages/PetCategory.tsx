@@ -52,7 +52,7 @@ export default function PetCategory() {
   </h1>
   <input
     type="text"
-    className="mx-auto p-2 block mb-8 w-3/4 md:w-2/4 rounded-md"
+    className=" left-0 right-0 sticky top-20 mx-auto p-2 block mb-8 w-3/4 md:w-2/4 rounded-md"
     placeholder={`Search a ${petCategory !== "birds" ? petCategory?.slice(0,3) : petCategory.slice(0,4)} type`}
     onChange={(e) => {
       setSearch(e.target.value);
