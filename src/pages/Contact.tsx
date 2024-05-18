@@ -55,7 +55,9 @@ function Contact() {
           required
         ></textarea>
         <button className="col-span-2 p-2 bg-rose-300 rounded-md text-slate-800 font-bold">
-          <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">Submit</a>
+          <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
+            Submit
+          </a>
         </button>
       </form>
     </main>
