@@ -19,12 +19,12 @@ const PetSchema = mongoose.Schema({
   },
   colors: {
     type: [String],
-    required: [true, "Colors are required"],
+    required: [true, "Colors is required"],
   },
   category: {
     type: String,
     required: [true, "Category is required"],
-    enum: ["birds", "cats", "dogs"],
+    enum: ["bird", "cat", "dog"],
   },
 });
 
