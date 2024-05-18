@@ -11,8 +11,8 @@ export default function App() {
         Welcome to our pet universe
         <motion.div
   whileHover={{
-    rotate: [0, 30, -30, 0],
-    transition: { duration: 2, repeat: Infinity, ease: "linear" }
+    rotate: [0, 30, -30],
+    transition: { duration: 2, repeat: Infinity, repeatType:"mirror", ease: "easeInOut" }
   }}
         >
 
