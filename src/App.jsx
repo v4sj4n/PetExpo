@@ -6,7 +6,7 @@ export default function App() {
     "w-full p-8 bg-rose-200 rounded-lg flex flex-col items-center justify-center";
   return (
     <main className="flex flex-col items-center mt-10 md:mt-20 md:w-3/4 mx-6 md:mx-auto">
-      <h1 className="flex text-balance items-center gap-2 flex-col md:gap-4 text-4xl text-center  md:text-5xl mb-6 text-zinc-100">
+      <h1 className="flex text-balance items-center gap-2 flex-col md:flex-row md:gap-6 text-4xl text-center  md:text-5xl mb-6 text-zinc-100">
         Welcome to our pet universe
         <FaPaw className="rotate-[22.5deg]  text-rose-200" />
       </h1>

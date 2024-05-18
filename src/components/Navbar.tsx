@@ -6,18 +6,18 @@ export const Navbar = () => {
   const [isAnimalToggleOpen, setIsAnimalToggleOpen] = useState(false);
   const handleAnimalToggle = () => setIsAnimalToggleOpen((prev) => !prev);
   return (
-    <nav className="h-16 bg-rose-100 flex justify-evenly items-center">
+    <nav className="sticky top-0 h-16 bg-rose-100 flex justify-around items-center">
       <a href="/">
         <h3 className="text-2xl text-zinc-800 font-bold">PetExpo</h3>
       </a>
       <ul className="flex gap-2">
         <li>
-          <span className="flex items-center cursor-pointer">
-            <a href="/pets">pets</a>
+          <span className="flex items-center cursor-pointer" onClick={handleAnimalToggle}>
+            <button>pets</button>
             {!isAnimalToggleOpen ? (
-              <IoMdArrowDropdown onClick={handleAnimalToggle} />
+              <IoMdArrowDropdown  />
             ) : (
-              <IoMdArrowDropup onClick={handleAnimalToggle} />
+              <IoMdArrowDropup />
             )}
           </span>
           <div
