@@ -5,3 +5,10 @@
 :root {
   background-color: #1f1f1f;
 }
+
+table, th, td {
+  border-width: 2px;
+  border-radius: 20px;
+  padding: 10px;
+}
+

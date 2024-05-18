@@ -11,7 +11,7 @@ export const Navbar = () => {
       <a href="/">
         <h3 className="text-2xl text-zinc-800 font-bold">PetExpo</h3>
       </a>
-      <ul className="flex gap-2">
+      <ul className="flex items-center gap-2">
         <li>
           <span
             className="flex items-center cursor-pointer"
@@ -30,7 +30,7 @@ export const Navbar = () => {
             transition={{ duration: 0.2 }}
             className={`absolute mt-2 ${
               isAnimalToggleOpen ? "" : "hidden"
-            } bg-red-50 py-2 px-4 mr-2 rounded-md `}
+            } bg-red-50 py-2 px-4 mr-2 rounded-md`}
           >
             <ul className="flex flex-col gap-2">
               <li>
@@ -68,6 +68,9 @@ export const Navbar = () => {
         </li>
         <li>
           <a href="/about">about</a>
+        </li>
+        <li className=" border-2 px-2 py-1 rounded-md border-rose-400 text-rose-700">
+          <a href="/admin">admin</a>
         </li>
       </ul>
     </nav>

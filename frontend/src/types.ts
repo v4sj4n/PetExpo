@@ -5,4 +5,5 @@ export type Animal = {
     description: string;
     origin: string;
     colors: string[];
+    category: string
   }
