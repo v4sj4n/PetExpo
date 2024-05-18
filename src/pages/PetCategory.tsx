@@ -40,10 +40,10 @@ export default function PetCategory() {
   }, []);
 
   if (loading) {
-    return <div className="text-white">Loading...</div>;
+    return <div className="text-4xl text-white text-center my-10 uppercase">Loading...</div>;
   }
   if (error) {
-    return <div className="text-white">{error}</div>;
+    return <div className="text-4xl text-white text-center my-10 uppercase">{error}</div>;
   }
   return (
 <div>
