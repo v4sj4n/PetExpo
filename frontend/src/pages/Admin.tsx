@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Animal } from "../types";
 import { useEffect } from "react";
 import DeleteEntry from "../components/AdminComponents/DeleteEntry";
+import EditEntry from "../components/AdminComponents/EditEntry";
 
 function Admin() {
   const [animalArray, setAnimalArray] = useState<Animal[]>([]);
@@ -10,6 +11,7 @@ function Admin() {
   const [sortField, setSortField] = useState<string | null>(null);
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
   const [activateDelete, setActivateDelete] = useState<boolean>(false);
+  const [activateEdit, setActivateEdit] = useState<boolean>(false);
   const [selectedAnimal, setSelectedAnimal] = useState<Animal | null>(null);
 
   //   const [search, setSearch] = useState<string>("");
@@ -34,11 +36,13 @@ function Admin() {
     setSortField(field);
     setSortDirection(direction);
 
-    const sortedArray = [...animalArray].sort((a, b) => {
-      if (a[field] < b[field]) return direction === "asc" ? -1 : 1;
-      if (a[field] > b[field]) return direction === "asc" ? 1 : -1;
-      return 0;
-    });
+const sortedArray = [...animalArray].sort((a, b) => {
+  const key = field as keyof Animal;
+
+  if (a[key] < b[key]) return direction === "asc" ? -1 : 1;
+  if (a[key] > b[key]) return direction === "asc" ? 1 : -1;
+  return 0;
+});
 
     setAnimalArray(sortedArray);
   };
@@ -65,14 +69,23 @@ function Admin() {
       </h1>
 
       {activateDelete && (
-                  <DeleteEntry
-                    close={() => {
-                      setActivateDelete(false);
-                      setSelectedAnimal(null);
-                    }}
-                    animal={selectedAnimal!}
-                  />
-                )}
+        <DeleteEntry
+          close={() => {
+            setActivateDelete(false);
+            setSelectedAnimal(null);
+          }}
+          animal={selectedAnimal!}
+        />
+      )}
+      {activateEdit && (
+        <EditEntry
+          close={() => {
+            setActivateEdit(false);
+            setSelectedAnimal(null);
+          }}
+          animal={selectedAnimal!}
+        />
+      )}
       <table className="border-2 rounded-lg w-full ">
         <thead className="text-white text-2xl">
           <tr>
@@ -99,12 +112,18 @@ function Admin() {
                 <td className="text-center">{animal.category}</td>
                 <td>
                   <div className="flex">
-                    <button className="text-white px-2 py-1 rounded-md">
+                    <button
+                      className="text-white px-2 py-1 rounded-md"
+                      onClick={() => {
+                        setSelectedAnimal(animal);
+                        setActivateEdit(true);
+                      }}
+                    >
                       Edit
                     </button>
 
                     <button
-                      className="inline-block  bg-rose-300 text-black px-2 py-1 rounded-md"
+                      className="bg-rose-300 text-black px-2 py-1 rounded-md"
                       onClick={() => {
                         setSelectedAnimal(animal);
                         setActivateDelete(true);
@@ -114,7 +133,6 @@ function Admin() {
                     </button>
                   </div>
                 </td>
-
               </tr>
             );
           })}

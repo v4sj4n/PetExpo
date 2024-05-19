@@ -4,7 +4,7 @@ import { Animal } from "../../types";
 
 function DeleteEntry({ animal, close }: { animal: Animal; close: () => void }) {
   const navigate = useNavigate();
-
+  
   const onHandleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     const res = await fetch(`http://localhost:4444/api/pets/${animal._id}`, {
@@ -22,7 +22,7 @@ function DeleteEntry({ animal, close }: { animal: Animal; close: () => void }) {
 
   return (
     <div
-      className="fixed top-0 left-0  bg-black/50 grid  h-full w-full "
+      className="fixed top-0 left-0  bg-black/50 backdrop-blur-md grid  h-full w-full "
       onClick={close}
     >
       <div
@@ -39,12 +39,21 @@ function DeleteEntry({ animal, close }: { animal: Animal; close: () => void }) {
               alt={`${animal.name} image`}
               className="size-40 object-cover mx-auto"
             />
-            <button
-              className="bg-red-500 text-white p-2 rounded-md"
-              type="submit"
-            >
-              Delete
-            </button>
+            <div className="flex">
+              <button
+                className=" text-white p-2 rounded-md w-full"
+                type="button"
+                onClick={close}
+              >
+                cancel
+              </button>
+              <button
+                className="bg-red-300 text-black font-bold p-2 rounded-md w-full"
+                type="submit"
+              >
+                Delete
+              </button>
+            </div>
           </div>
         </form>
       </div>
