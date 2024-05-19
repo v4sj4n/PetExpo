@@ -1,17 +1,16 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
-import {  FullPetCard } from "./FullPetCard";
-import { Animal } from "../types";
-
+import { useState } from "react"
+import { motion } from "framer-motion"
+import { FullPetCard } from "./FullPetCard"
+import { Animal } from "../types"
 
 export const PetCard = ({
   animal,
   animalType,
 }: {
-  animal: Animal;
-  animalType: string;
+  animal: Animal
+  animalType: string
 }) => {
-  const [showFullCard, setShowFullCard] = useState(false);
+  const [showFullCard, setShowFullCard] = useState(false)
   return (
     <motion.div className="rounded-xl overflow-hidden">
       <img
@@ -37,5 +36,5 @@ export const PetCard = ({
         />
       )}
     </motion.div>
-  );
-};
+  )
+}

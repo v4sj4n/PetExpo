@@ -1,24 +1,24 @@
-import { FormEvent } from "react";
-import { useNavigate } from "react-router-dom";
-import { Animal } from "../../types";
+import { FormEvent } from "react"
+import { useNavigate } from "react-router-dom"
+import { Animal } from "../../types"
 
 function DeleteEntry({ animal, close }: { animal: Animal; close: () => void }) {
-  const navigate = useNavigate();
-  
+  const navigate = useNavigate()
+
   const onHandleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
+    e.preventDefault()
     const res = await fetch(`http://localhost:4444/api/pets/${animal._id}`, {
       method: "DELETE",
-    });
+    })
     if (res.ok) {
-      console.log("Deleted");
-      navigate(0);
+      console.log("Deleted")
+      navigate(0)
     }
-  };
+  }
 
   const stopPropagation = (e: React.MouseEvent) => {
-    e.stopPropagation();
-  };
+    e.stopPropagation()
+  }
 
   return (
     <div
@@ -58,7 +58,7 @@ function DeleteEntry({ animal, close }: { animal: Animal; close: () => void }) {
         </form>
       </div>
     </div>
-  );
+  )
 }
 
-export default DeleteEntry;
+export default DeleteEntry

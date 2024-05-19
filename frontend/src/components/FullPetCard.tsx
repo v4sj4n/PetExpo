@@ -1,21 +1,16 @@
-import {
-  MdClose,
-  MdOutlineInvertColors,
-  MdLocationPin,
-} from "react-icons/md";
+import { MdClose, MdOutlineInvertColors, MdLocationPin } from "react-icons/md"
 
-
-import { motion } from "framer-motion";
-import { Animal } from "../types";
+import { motion } from "framer-motion"
+import { Animal } from "../types"
 
 export const FullPetCard = ({
   animal,
   animalType,
   closeCard,
 }: {
-  animal: Animal;
-  animalType: string;
-  closeCard: () => void;
+  animal: Animal
+  animalType: string
+  closeCard: () => void
 }) => {
   return (
     <motion.div
@@ -55,25 +50,23 @@ export const FullPetCard = ({
               )}
             </p>
 
-
-                <p className="text-slate-300 text-md font-bold flex items-center gap-2">
-                  <MdLocationPin className="text-2xl" />
-                  <span className="font-bold">{animal.origin}</span>
-                </p>
-                <p className="text-slate-300 text-md font-bold flex items-center gap-2">
-                  <MdOutlineInvertColors className="text-2xl" />
-                  <span className="">
-                    {animal.colors.map((color, id) => {
-                      return `${color}${
-                        animal.colors.length - 1 !== id ? ", " : ""
-                      }`;
-                    })}
-                  </span>
-                </p>
+            <p className="text-slate-300 text-md font-bold flex items-center gap-2">
+              <MdLocationPin className="text-2xl" />
+              <span className="font-bold">{animal.origin}</span>
+            </p>
+            <p className="text-slate-300 text-md font-bold flex items-center gap-2">
+              <MdOutlineInvertColors className="text-2xl" />
+              <span className="">
+                {animal.colors.map((color, id) => {
+                  return `${color}${
+                    animal.colors.length - 1 !== id ? ", " : ""
+                  }`
+                })}
+              </span>
+            </p>
           </div>
         </div>
       </div>
     </motion.div>
-  );
-};
-
+  )
+}

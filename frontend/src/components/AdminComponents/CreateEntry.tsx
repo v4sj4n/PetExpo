@@ -1,19 +1,27 @@
 import { FormEvent, MouseEvent, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { Animal } from "../../types"
 
-function EditEntry({ animal, close }: { animal: Animal; close: () => void }) {
-  const [updatedAnimal, setUpdatedAnimal] = useState<Animal>(animal)
+function CreateEntry({ close }: { close: () => void }) {
+  const [animalToCreate, setAnimalToCreate] = useState({
+    name: "",
+    origin: "",
+    description: "",
+    image: "",
+    colors: [""],
+    category: "dog",
+  })
+
   const navigate = useNavigate()
 
   const onHandleSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    const res = await fetch(`http://localhost:4444/api/pets/${animal._id}`, {
-      method: "PUT",
+    console.log(animalToCreate)
+    const res = await fetch(`http://localhost:4444/api/pets/`, {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(updatedAnimal),
+      body: JSON.stringify(animalToCreate),
     })
     if (res.ok) {
       console.log("Updated")
@@ -37,11 +45,6 @@ function EditEntry({ animal, close }: { animal: Animal; close: () => void }) {
         <form onSubmit={onHandleSubmit}>
           <div className="flex flex-col gap-4">
             <h1 className="text-2xl text-white">Edit your pet:</h1>
-            <img
-              src={`${animal.image}?q=10`}
-              alt={`${animal.name} image`}
-              className="size-40 object-cover mx-auto"
-            />
             <div className="grid grid-cols-2 gap-2">
               <label htmlFor="name">
                 <span className="text-xl text-white">Name:</span>
@@ -49,10 +52,10 @@ function EditEntry({ animal, close }: { animal: Animal; close: () => void }) {
                   type="text"
                   id="name"
                   name="name"
-                  value={updatedAnimal.name}
+                  value={animalToCreate.name}
                   onChange={(e) => {
-                    setUpdatedAnimal({
-                      ...updatedAnimal,
+                    setAnimalToCreate({
+                      ...animalToCreate,
                       name: e.target.value,
                     })
                   }}
@@ -65,11 +68,27 @@ function EditEntry({ animal, close }: { animal: Animal; close: () => void }) {
                   type="text"
                   id="name"
                   name="name"
-                  value={updatedAnimal.origin}
+                  value={animalToCreate.origin}
                   onChange={(e) => {
-                    setUpdatedAnimal({
-                      ...updatedAnimal,
+                    setAnimalToCreate({
+                      ...animalToCreate,
                       origin: e.target.value,
+                    })
+                  }}
+                  className="w-full rounded-md p-2"
+                />
+              </label>
+              <label htmlFor="origin" className="col-span-2">
+                <span className="text-xl text-white">Imageurl:</span>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={animalToCreate.image}
+                  onChange={(e) => {
+                    setAnimalToCreate({
+                      ...animalToCreate,
+                      image: e.target.value,
                     })
                   }}
                   className="w-full rounded-md p-2"
@@ -82,10 +101,10 @@ function EditEntry({ animal, close }: { animal: Animal; close: () => void }) {
                   name="description"
                   id="description"
                   className=" rounded-md p-2  w-full resize-none leading-5"
-                  value={updatedAnimal.description}
+                  value={animalToCreate.description}
                   onChange={(e) => {
-                    setUpdatedAnimal({
-                      ...updatedAnimal,
+                    setAnimalToCreate({
+                      ...animalToCreate,
                       description: e.target.value,
                     })
                   }}
@@ -98,10 +117,10 @@ function EditEntry({ animal, close }: { animal: Animal; close: () => void }) {
                   type="text"
                   id="colors"
                   name="colors"
-                  value={updatedAnimal.colors.join(", ")}
+                  value={animalToCreate.colors.join(", ")}
                   onChange={(e) => {
-                    setUpdatedAnimal({
-                      ...updatedAnimal,
+                    setAnimalToCreate({
+                      ...animalToCreate,
                       colors: e.target.value
                         .split(",")
                         .map((color) => color.trim()),
@@ -116,10 +135,10 @@ function EditEntry({ animal, close }: { animal: Animal; close: () => void }) {
                 <select
                   name="pet"
                   id="pet"
-                  defaultValue={animal.category}
+                  defaultValue={animalToCreate.category}
                   onChange={(e) => {
-                    setUpdatedAnimal({
-                      ...updatedAnimal,
+                    setAnimalToCreate({
+                      ...animalToCreate,
                       category: e.target.value,
                     })
                   }}
@@ -153,4 +172,4 @@ function EditEntry({ animal, close }: { animal: Animal; close: () => void }) {
   )
 }
 
-export default EditEntry
+export default CreateEntry

@@ -1,7 +1,7 @@
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet"
 
 const MapComponent = () => {
-  const position = [41.311711, 19.809271];
+  const position = [41.311711, 19.809271]
 
   return (
     // @ts-expect-error error that doesnt affect the website
@@ -17,7 +17,7 @@ const MapComponent = () => {
         </Popup>
       </Marker>
     </MapContainer>
-  );
-};
+  )
+}
 
-export default MapComponent;
+export default MapComponent

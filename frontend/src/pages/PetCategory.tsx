@@ -1,18 +1,20 @@
-import { useState } from "react";
-import { useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { PetCard } from "../components/PetCard";
-import { motion } from "framer-motion";
-import { Animal } from "../types";
-
+import { useContext, useState } from "react"
+import { useEffect } from "react"
+import { useParams } from "react-router-dom"
+import { PetCard } from "../components/PetCard"
+import { motion } from "framer-motion"
+import { IsDropdownClickedContext } from "../context/IsDropdownClicked"
+import { Animal } from "../types"
 
 export default function PetCategory() {
-  const [animalArray, setAnimalArray] = useState([]);
-  const [filteredAnimalArray, setFilteredAnimalArray] = useState([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-  const { petCategory } = useParams();
-  const [search, setSearch] = useState<string>("");
+  const { isClicked } = useContext(IsDropdownClickedContext)
+
+  const [animalArray, setAnimalArray] = useState([])
+  const [filteredAnimalArray, setFilteredAnimalArray] = useState([])
+  const [loading, setLoading] = useState<boolean>(true)
+  const [error, setError] = useState<string | null>(null)
+  const { petCategory } = useParams()
+  const [search, setSearch] = useState<string>("")
   useEffect(() => {
     if (
       petCategory === "dogs" ||
@@ -22,36 +24,38 @@ export default function PetCategory() {
       const fetchPetCategory = async () => {
         try {
           const res = await fetch(
-            `http://localhost:4444/api/pets/category/${petCategory}`
-          );
-          const data = await res.json();
-          setAnimalArray(data);
-          setLoading(false);
+            `http://localhost:4444/api/pets?category=${
+              petCategory === "birds" ? "bird" : petCategory.slice(0, 3)
+            }`
+          )
+          const data = await res.json()
+          setAnimalArray(data)
+          setLoading(false)
         } catch (err) {
-          setError("Error fetching data");
-          setLoading(false);
+          setError("Error fetching data")
+          setLoading(false)
         }
-      };
-      fetchPetCategory();
+      }
+      fetchPetCategory()
     } else {
-      setLoading(false);
-      setError("Invalid Category");
+      setLoading(false)
+      setError("Invalid Category")
     }
-  }, [petCategory]);
+  }, [petCategory])
 
   if (loading) {
     return (
       <div className="text-4xl text-white text-center my-10 uppercase">
         Loading...
       </div>
-    );
+    )
   }
   if (error) {
     return (
       <div className="text-4xl text-white text-center my-10 uppercase">
         {error}
       </div>
-    );
+    )
   }
   return (
     <div>
@@ -60,19 +64,21 @@ export default function PetCategory() {
       </h1>
       <input
         type="text"
-        className=" left-0 right-0 sticky top-20 mx-auto p-2 block mb-8 w-3/4 md:w-2/4 rounded-md"
+        className={`${
+          isClicked ? "top-44" : "top-20"
+        } left-0 right-0 sticky  mx-auto p-3 block mb-8 w-3/4 md:w-2/4 rounded-md `}
         placeholder={`Search a ${
           petCategory !== "birds"
             ? petCategory?.slice(0, 3)
             : petCategory.slice(0, 4)
         } type`}
         onChange={(e) => {
-          setSearch(e.target.value);
+          setSearch(e.target.value)
           setFilteredAnimalArray(
             animalArray.filter((animal: Animal) =>
               animal.name.toLowerCase().includes(e.target.value.toLowerCase())
             )
-          );
+          )
         }}
       />
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-8 w-3/4 mx-auto">
@@ -99,5 +105,5 @@ export default function PetCategory() {
             ))}
       </div>
     </div>
-  );
+  )
 }

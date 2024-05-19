@@ -1,5 +1,5 @@
-const express = require("express");
-const router = express.Router();
+const express = require("express")
+const router = express.Router()
 const {
   getPets,
   getPet,
@@ -7,13 +7,13 @@ const {
   insertPet,
   updatePet,
   deletePet,
-} = require("../controllers/pet.controllers");
+} = require("../controllers/pet.controllers")
 
-router.get("/", getPets);
-router.get("/:id", getPet);
-router.post("/", insertPet);
-router.put("/:id", updatePet);
-router.get("/category/:petCategory", getPetCategory);
-router.delete("/:id", deletePet);
+router.get("/pets", getPets)
+router.get("/pets/:id", getPet)
+router.post("/pets", insertPet)
+router.put("/pets/:id", updatePet)
+router.get("/pets/category/:petCategory", getPetCategory)
+router.delete("/pets/:id", deletePet)
 
-module.exports = PetRouter = { router };
+module.exports = PetRouter = { router }
