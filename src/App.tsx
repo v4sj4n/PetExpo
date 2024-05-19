@@ -1,10 +1,10 @@
-import { FaPaw } from "react-icons/fa";
-import { PiBirdFill, PiCatFill, PiDogFill } from "react-icons/pi";
-import { motion } from "framer-motion";
+import { FaPaw } from "react-icons/fa"
+import { PiBirdFill, PiCatFill, PiDogFill } from "react-icons/pi"
+import { motion } from "framer-motion"
 
 export default function App() {
   const animalCategoryClass =
-    "w-full p-8 bg-rose-200 hover:bg-rose-300 rounded-lg flex flex-col items-center justify-center ";
+    "w-full p-8 bg-rose-200 hover:bg-rose-300 rounded-lg flex flex-col items-center justify-center"
   return (
     <main className="flex flex-col items-center mt-10 md:mt-20 md:w-3/4 mx-6 md:mx-auto">
       <h1 className="flex text-balance items-center gap-2 flex-col md:flex-row md:gap-6 text-4xl text-center  md:text-5xl mb-6 text-zinc-100">
@@ -34,7 +34,7 @@ export default function App() {
         transition={{
           staggerChildren: 0.5,
         }}
-        className="grid grid-cols-2 gap-3 w-full mb-16"
+        className="grid grid-cols-2 gap-3 w-full mb-8"
       >
         <motion.div
           initial={{ scale: 0, x: -100, opacity: 0 }}
@@ -46,7 +46,7 @@ export default function App() {
           }}
           className={animalCategoryClass}
         >
-          <a href="/pets/dogs" className="flex flex-col items-center">
+          <a href="/pets/dogs">
             <PiDogFill className="size-20 md:size-36" />
             <h3>dogs.</h3>
           </a>
@@ -61,7 +61,7 @@ export default function App() {
           }}
           className={animalCategoryClass}
         >
-          <a href="/pets/cats" className="flex flex-col items-center">
+          <a href="/pets/cats">
             <PiCatFill className="size-20 md:size-36" />
 
             <h3>cats.</h3>
@@ -76,12 +76,12 @@ export default function App() {
           }}
           className={`${animalCategoryClass} col-span-2`}
         >
-          <a href="/pets/birds" className="flex flex-col items-center">
+          <a href="/pets/birds">
             <PiBirdFill className="size-20 md:size-36" />
             <h3>birds.</h3>
           </a>
         </motion.div>
       </motion.div>
     </main>
-  );
+  )
 }

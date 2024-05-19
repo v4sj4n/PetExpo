@@ -1,5 +1,3 @@
-import React from "react";
-
 function Error() {
   return (
     <div>
@@ -7,7 +5,7 @@ function Error() {
         Page does not exist
       </h1>
     </div>
-  );
+  )
 }
 
-export default Error;
+export default Error
