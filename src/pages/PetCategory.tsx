@@ -4,11 +4,10 @@ import { useParams } from "react-router-dom"
 import { PetCard } from "../components/PetCard"
 import { motion } from "framer-motion"
 import { Animal } from "../types"
-import { IsDropdownClickedContext } from '../context/IsDropdownClicked';
-
+import { IsDropdownClickedContext } from "../context/IsDropdownClicked"
 
 export default function PetCategory() {
- const {isClicked, toggleClick} = useContext(IsDropdownClickedContext)
+  const { isClicked } = useContext(IsDropdownClickedContext)
   const [animalArray, setAnimalArray] = useState([])
   const [filteredAnimalArray, setFilteredAnimalArray] = useState([])
   const [loading, setLoading] = useState<boolean>(true)
@@ -25,22 +24,22 @@ export default function PetCategory() {
         try {
           const res = await fetch(
             `https://freetestapi.com/api/v1/${petCategory}`
-          );
-          const data = await res.json();
-          console.log(data.length);
-          setAnimalArray(data);
-          setLoading(false);
+          )
+          const data = await res.json()
+          console.log(data.length)
+          setAnimalArray(data)
+          setLoading(false)
         } catch (err) {
-          setError("Error fetching data");
-          setLoading(false);
+          setError("Error fetching data")
+          setLoading(false)
         }
-      };
-      fetchPetCategory();
+      }
+      fetchPetCategory()
     } else {
-      setLoading(false);
-      setError("Invalid Category");
+      setLoading(false)
+      setError("Invalid Category")
     }
-  }, []);
+  }, [petCategory])
 
   if (loading) {
     return (
@@ -63,7 +62,9 @@ export default function PetCategory() {
       </h1>
       <input
         type="text"
-        className={`${isClicked ? "top-44" : "top-20"} left-0 right-0 sticky  mx-auto p-3 block mb-8 w-3/4 md:w-2/4 rounded-md `}
+        className={`${
+          isClicked ? "top-44" : "top-20"
+        } left-0 right-0 sticky  mx-auto p-3 block mb-8 w-3/4 md:w-2/4 rounded-md `}
         placeholder={`Search a ${
           petCategory !== "birds"
             ? petCategory?.slice(0, 3)
