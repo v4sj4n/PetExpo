@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require("mongoose")
 
 const PetSchema = mongoose.Schema({
   name: {
@@ -26,8 +26,8 @@ const PetSchema = mongoose.Schema({
     required: [true, "Category is required"],
     enum: ["bird", "cat", "dog"],
   },
-});
+})
 
-const Pet = mongoose.model("Pet", PetSchema);
+const Pet = mongoose.model("Pet", PetSchema)
 
-module.exports = Pet;
+module.exports = Pet
