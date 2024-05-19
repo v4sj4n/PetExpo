@@ -46,7 +46,7 @@ export default function App() {
           }}
           className={animalCategoryClass}
         >
-          <a href="/pets/dogs">
+          <a href="/pets/dogs" className="flex flex-col items-center">
             <PiDogFill className="size-20 md:size-36" />
             <h3>dogs.</h3>
           </a>
@@ -61,7 +61,7 @@ export default function App() {
           }}
           className={animalCategoryClass}
         >
-          <a href="/pets/cats">
+          <a href="/pets/cats" className="flex flex-col items-center">
             <PiCatFill className="size-20 md:size-36" />
 
             <h3>cats.</h3>
@@ -76,7 +76,7 @@ export default function App() {
           }}
           className={`${animalCategoryClass} col-span-2`}
         >
-          <a href="/pets/birds">
+          <a href="/pets/birds" className="flex flex-col items-center">
             <PiBirdFill className="size-20 md:size-36" />
             <h3>birds.</h3>
           </a>

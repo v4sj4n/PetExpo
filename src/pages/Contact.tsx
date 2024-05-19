@@ -2,7 +2,7 @@
 function Contact() {
   return (
     <main className="flex flex-col items-center mt-10 md:mt-20 md:w-3/4 mx-6 md:mx-auto">
-      <h1 className="flex text-balance items-center gap-2 flex-col md:flex-row md:gap-6 text-4xl text-center  md:text-5xl mb-6 text-zinc-100">
+      <h1 className="flex text-balance items-center gap-2 flex-col md:flex-row md:gap-6   text-4xl text-center  md:text-5xl mb-6 text-zinc-100">
         Got any questions?
       </h1>
       <p className=" text-lg text-center text-zinc-200/75 leading-6 mb-10">
@@ -10,7 +10,7 @@ function Contact() {
       </p>
 
       <form
-        className="grid grid-cols-2  md:2/5 gap-x-2 gap-y-4"
+        className="grid grid-cols-2  w-2/3 gap-x-2 gap-y-4"
         onSubmit={(e) => {
           e.preventDefault()
           e.currentTarget.reset()
