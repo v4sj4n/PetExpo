@@ -1,4 +1,4 @@
-# PetExpo FrontEnd + Backend
+# PetExpo FrontEnd
 
 This is a simple fullstack project for a shop called PetExpo, the site displays info for pets such as dogs, cats and birds, you can contact online or check out the about page if you need other infos :)
 
