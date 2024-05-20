@@ -11,7 +11,6 @@ function DeleteEntry({ animal, close }: { animal: Animal; close: () => void }) {
       method: "DELETE",
     })
     if (res.ok) {
-      console.log("Deleted")
       navigate(0)
     }
   }

@@ -15,7 +15,6 @@ function CreateEntry({ close }: { close: () => void }) {
 
   const onHandleSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    console.log(animalToCreate)
     const res = await fetch(`http://localhost:4444/api/pets/`, {
       method: "POST",
       headers: {
@@ -24,7 +23,6 @@ function CreateEntry({ close }: { close: () => void }) {
       body: JSON.stringify(animalToCreate),
     })
     if (res.ok) {
-      console.log("Updated")
       navigate(0)
     }
   }

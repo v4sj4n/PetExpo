@@ -7,7 +7,7 @@ import { IsDropdownClickedContext } from "../context/IsDropdownClicked"
 import { Animal } from "../types"
 
 export default function PetCategory() {
-  const { isClicked } = useContext(IsDropdownClickedContext)
+  const { isClicked, isHidden } = useContext(IsDropdownClickedContext)
 
   const [animalArray, setAnimalArray] = useState([])
   const [filteredAnimalArray, setFilteredAnimalArray] = useState([])
@@ -29,7 +29,7 @@ export default function PetCategory() {
             }`
           )
           const data = await res.json()
-          setAnimalArray(data)
+          setAnimalArray([...data,...data,...data,...data,...data,...data])
           setLoading(false)
         } catch (err) {
           setError("Error fetching data")
@@ -65,7 +65,7 @@ export default function PetCategory() {
       <input
         type="text"
         className={`${
-          isClicked ? "top-44" : "top-20"
+          isClicked && !isHidden ? "top-44" : !isHidden ? "top-20" : "top-4"
         } left-0 right-0 sticky  mx-auto p-3 block mb-8 w-3/4 md:w-2/4 rounded-md `}
         placeholder={`Search a ${
           petCategory !== "birds"

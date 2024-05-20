@@ -16,7 +16,6 @@ function EditEntry({ animal, close }: { animal: Animal; close: () => void }) {
       body: JSON.stringify(updatedAnimal),
     })
     if (res.ok) {
-      console.log("Updated")
       navigate(0)
     }
   }

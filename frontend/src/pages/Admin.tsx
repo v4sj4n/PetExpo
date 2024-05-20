@@ -22,7 +22,6 @@ function Admin() {
     const handleResize = () => {
       setWidth(window.innerWidth)
     }
-    console.log(width)
 
     window.addEventListener("resize", handleResize)
 
