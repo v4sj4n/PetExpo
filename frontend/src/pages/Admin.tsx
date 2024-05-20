@@ -45,6 +45,24 @@ function Admin() {
     fetchPetCategory()
   }, [])
 
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setActivateDelete(false)
+        setActivateEdit(false)
+        setActivateCreate(false)
+        setSelectedAnimal(null)
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [])
+
   const handleSort = (field: string) => {
     const direction =
       sortField === field && sortDirection === "asc" ? "desc" : "asc"

@@ -21,7 +21,7 @@ function DeleteEntry({ animal, close }: { animal: Animal; close: () => void }) {
 
   return (
     <div
-      className="fixed top-0 left-0  bg-black/50 backdrop-blur-md grid  h-full w-full "
+      className="fixed top-0 left-0  bg-black/10 backdrop-blur-sm grid  h-full w-full "
       onClick={close}
     >
       <div
