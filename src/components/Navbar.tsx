@@ -1,13 +1,34 @@
 import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io"
 import { LuDog, LuCat, LuBird } from "react-icons/lu"
-import { motion } from "framer-motion"
-import {IsDropdownClickedContext} from "../context/IsDropdownClicked"
+import { motion, useMotionValueEvent, useScroll } from "framer-motion"
+import { IsDropdownClickedContext } from "../context/IsDropdownClicked"
 import { useContext } from "react"
 
 export const Navbar = () => {
-  const {isClicked, toggleClick} = useContext(IsDropdownClickedContext)
+  const { isClicked, toggleClick, isHidden, hide, show } = useContext(
+    IsDropdownClickedContext
+  )
+  const { scrollY } = useScroll()
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const previous = scrollY.getPrevious()
+    if (latest > previous! && latest > 200) {
+      hide()
+    } else {
+      show()
+    }
+  })
+
   return (
-    <nav className="sticky top-0 h-16 bg-rose-100 flex justify-around items-center">
+    <motion.nav
+      variants={{
+        visible: { y: 0 },
+        hidden: { y: -100 },
+      }}
+      animate={isHidden ? "hidden" : "visible"}
+      transition={{ duration: 0.35, ease: "easeInOut" }}
+      className="sticky top-0 h-16 bg-rose-100 flex justify-around items-center"
+    >
       <a href="/">
         <h3 className="text-2xl text-zinc-800 font-bold">PetExpo</h3>
       </a>
@@ -70,6 +91,6 @@ export const Navbar = () => {
           <a href="/about">about</a>
         </li>
       </ul>
-    </nav>
+    </motion.nav>
   )
 }
