@@ -9,10 +9,13 @@ export const Navbar = () => {
     IsDropdownClickedContext
   )
   const { scrollY } = useScroll()
-
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = scrollY.getPrevious()
     if (latest > previous! && latest > 200) {
+      if(isClicked) {
+      toggleClick()
+
+      }
       hide()
     } else {
       show()
@@ -50,7 +53,7 @@ export const Navbar = () => {
             }}
             transition={{ duration: 0.2 }}
             className={`absolute mt-2 ${
-              isClicked ? "" : "hidden"
+              isClicked && !isHidden ? "" : "hidden"
             } bg-red-50 py-2 px-4 mr-2 rounded-md`}
           >
             <ul className="flex flex-col gap-2">
