@@ -3,6 +3,7 @@ import { LuDog, LuCat, LuBird } from "react-icons/lu"
 import { motion, useMotionValueEvent, useScroll } from "framer-motion"
 import { IsDropdownClickedContext } from "../context/IsDropdownClicked"
 import { useContext } from "react"
+import { Link } from "react-router-dom"
 
 export const Navbar = () => {
   const { isClicked, toggleClick, isHidden, hide, show } = useContext(
@@ -32,9 +33,9 @@ export const Navbar = () => {
       transition={{ duration: 0.35, ease: "easeInOut" }}
       className="sticky top-0 h-16 bg-rose-100 flex justify-around items-center"
     >
-      <a href="/">
+      <Link to="/">
         <h3 className="text-2xl text-zinc-800 font-bold">PetExpo</h3>
-      </a>
+      </Link>
       <ul className="flex items-center gap-2">
         <li>
           <span
@@ -58,40 +59,40 @@ export const Navbar = () => {
           >
             <ul className="flex flex-col gap-2">
               <li>
-                <a
+                <Link
                   className="flex items-center gap-2 text-lg"
-                  href="/pets/dogs"
+                  to="/pets/dogs"
                 >
                   <LuDog width={20} />
                   Dogs
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   className="flex items-center gap-2 text-lg"
-                  href="/pets/cats"
+                  to="/pets/cats"
                 >
                   <LuCat width={20} />
                   Cats
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   className="flex items-center gap-2 text-lg"
-                  href="/pets/birds"
+                  to="/pets/birds"
                 >
                   <LuBird width={20} />
                   Birds
-                </a>
+                </Link>
               </li>
             </ul>
           </motion.div>
         </li>
         <li>
-          <a href="/contact">contact</a>
+          <Link to="/contact">contact</Link>
         </li>
         <li>
-          <a href="/about">about</a>
+          <Link to="/about">about</Link>
         </li>
       </ul>
     </motion.nav>

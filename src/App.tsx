@@ -36,7 +36,7 @@ export default function App() {
         }}
         className="grid grid-cols-2 gap-3 w-full mb-8"
       >
-        <motion.div
+        <motion.a
           initial={{ scale: 0, x: -100, opacity: 0 }}
           animate={{ scale: 1, x: 0, opacity: 1 }}
           whileHover={{
@@ -44,14 +44,15 @@ export default function App() {
             scale: 1.1,
             zIndex: 99,
           }}
+          href="/pets/dogs"
           className={animalCategoryClass}
         >
-          <a href="/pets/dogs" className="flex flex-col items-center">
+          <div className="flex flex-col items-center">
             <PiDogFill className="size-20 md:size-36" />
             <h3>dogs.</h3>
-          </a>
-        </motion.div>
-        <motion.div
+          </div>
+        </motion.a>
+        <motion.a
           initial={{ scale: 0, x: 100, opacity: 0 }}
           animate={{ scale: 1, x: 0, opacity: 1 }}
           whileHover={{
@@ -59,28 +60,30 @@ export default function App() {
             scale: 1.1,
             zIndex: 99,
           }}
+          href="/pets/cats"
           className={animalCategoryClass}
         >
-          <a href="/pets/cats" className="flex flex-col items-center">
+          <div className="flex flex-col items-center">
             <PiCatFill className="size-20 md:size-36" />
 
             <h3>cats.</h3>
-          </a>
-        </motion.div>
-        <motion.div
+          </div>
+        </motion.a>
+        <motion.a
           initial={{ scale: 0, y: -100, opacity: 0 }}
           animate={{ scale: 1, y: 0, opacity: 1 }}
           whileHover={{
             scale: 1.05,
             zIndex: 99,
           }}
+          href="/pets/birds"
           className={`${animalCategoryClass} col-span-2`}
         >
-          <a href="/pets/birds" className="flex flex-col items-center">
+          <div className="flex flex-col items-center">
             <PiBirdFill className="size-20 md:size-36" />
             <h3>birds.</h3>
-          </a>
-        </motion.div>
+          </div>
+        </motion.a>
       </motion.div>
     </main>
   )
