@@ -1,6 +1,7 @@
 # PetExpo FrontEnd + Backend
 
 This is a simple fullstack project for a shop called PetExpo, the site displays info for pets such as dogs, cats and birds, you can contact online or check out the about page if you need other infos :)
+psst if you are an admin you can add remove update or see the pets being displayed on the main site
 
 ## The frontend is done in React it uses other dependencies like:
 
