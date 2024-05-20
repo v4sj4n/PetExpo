@@ -29,7 +29,7 @@ export default function PetCategory() {
             }`
           )
           const data = await res.json()
-          setAnimalArray([...data,...data,...data,...data,...data,...data])
+          setAnimalArray(data)
           setLoading(false)
         } catch (err) {
           setError("Error fetching data")
