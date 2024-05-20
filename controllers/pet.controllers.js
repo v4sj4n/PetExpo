@@ -2,8 +2,23 @@ const Pet = require("../models/petModel")
 
 const getPets = async (req, res) => {
   const queries = req.query
+  const validKeys = [
+    "name",
+    "description",
+    "image",
+    "origin",
+    "colors",
+    "category",
+  ]
+
   try {
     if (queries) {
+      const isValid = Object.keys(queries).every((key) =>
+        validKeys.includes(key)
+      )
+      if (!isValid) {
+        return res.status(400).json({ message: "Invalid query parameter" })
+      }
       const pets = await Pet.find(queries).select("-__v")
       return res.status(200).json(pets)
     }
@@ -63,28 +78,9 @@ const deletePet = async (req, res) => {
   }
 }
 
-const getPetCategory = async (req, res) => {
-  const { petCategory } = req.params
-  if (!["birds", "cats", "dogs"].includes(petCategory)) {
-    return res.status(400).json({ message: "Invalid category" })
-  }
-  try {
-    const pets = await Pet.find({
-      category:
-        petCategory !== "birds"
-          ? petCategory.slice(0, 3)
-          : petCategory.slice(0, 4),
-    }).select("-__v")
-    res.status(200).json(pets)
-  } catch (err) {
-    res.status(500).json({ message: err.message })
-  }
-}
-
 module.exports = {
   getPets,
   getPet,
-  getPetCategory,
   insertPet,
   updatePet,
   deletePet,
