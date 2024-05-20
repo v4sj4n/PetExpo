@@ -12,12 +12,14 @@ export const Navbar = () => {
   const { scrollY } = useScroll()
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = scrollY.getPrevious()
-    if (latest > previous! && latest > 200) {
-      if(isClicked) {
-      toggleClick()
 
+    if (latest > previous!) {
+      if (isClicked) {
+        toggleClick()
       }
-      hide()
+      if (latest > 200) {
+        hide()
+      }
     } else {
       show()
     }

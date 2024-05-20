@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import { FullPetCard } from "./FullPetCard"
 import { Animal } from "../types"
@@ -11,6 +11,19 @@ export const PetCard = ({
   animalType: string
 }) => {
   const [showFullCard, setShowFullCard] = useState(false)
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setShowFullCard(false)
+      }
+    }
+
+    document.addEventListener("keydown", handleKeyDown)
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown)
+    }
+  }, [])
   return (
     <motion.div className="rounded-xl overflow-hidden">
       <img
