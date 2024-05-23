@@ -1,7 +1,8 @@
-import { MouseEvent, useState } from "react"
+import {  useState } from "react"
 import { Animal } from "../../types"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import axios from "axios"
+import { afterHandlerHelper, createEntry } from "../../utils/AdminApiHandlers"
+import { stopPropagation } from "../../utils/StopPropagation"
 
 function CreateEntry({ close }: { close: () => void }) {
   const queryClient = useQueryClient()
@@ -15,38 +16,11 @@ function CreateEntry({ close }: { close: () => void }) {
   })
 
   const { mutate, error, isSuccess } = useMutation({
-    mutationFn: async (animalToCreate: Animal) => {
-      try {
-        const res = await axios.post(
-          `http://localhost:4444/api/pets/`,
-          animalToCreate
-        )
-        return res.data
-      } catch (err) {
-        if (err instanceof Error) {
-          throw new Error(err.message)
-        } else {
-          throw new Error("An unknown error occurred")
-        }
-      }
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["petsListAdmin"] })
-      setTimeout(() => {
-        close()
-      }, 1234)
-    },
-    onError: () => {
-      queryClient.invalidateQueries({ queryKey: ["petsListAdmin"] })
-      setTimeout(() => {
-        close()
-      }, 1234)
-    },
+    mutationFn: (animalToCreate: Animal) => createEntry(animalToCreate),
+    onSuccess: () => afterHandlerHelper(queryClient, close),
+    onError: () => afterHandlerHelper(queryClient, close),
   })
 
-  const stopPropagation = (e: MouseEvent) => {
-    e.stopPropagation()
-  }
 
   return (
     <div
@@ -56,7 +30,7 @@ function CreateEntry({ close }: { close: () => void }) {
       {!isSuccess && !error ? (
         <div
           className="fixed bg-zinc-800 p-8 left-0 right-0 mx-auto w-fit top-10 rounded-lg"
-          onClick={stopPropagation}
+          onClick={() => stopPropagation}
         >
           <form
             onSubmit={(e) => {
@@ -191,14 +165,14 @@ function CreateEntry({ close }: { close: () => void }) {
         </div>
       ) : isSuccess ? (
         <div
-          onClick={stopPropagation}
+          onClick={() => stopPropagation}
           className="fixed bg-zinc-800 p-8 left-0 right-0 mx-auto w-fit top-10 rounded-lg"
         >
           <p className="text-green-300">The creation was succesful!</p>
         </div>
       ) : (
         <div
-          onClick={stopPropagation}
+          onClick={() => stopPropagation}
           className="fixed bg-zinc-800 p-8 left-0 right-0 mx-auto w-fit top-10 rounded-lg"
         >
           <p className="text-red-300">Error: {error?.message}</p>

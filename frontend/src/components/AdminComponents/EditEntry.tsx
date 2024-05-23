@@ -1,7 +1,8 @@
-import { MouseEvent, useState } from "react"
+import { useState } from "react"
 import { Animal } from "../../types"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import axios from "axios"
+import { stopPropagation } from "../../utils/StopPropagation"
+import { afterHandlerHelper, editEntry } from "../../utils/AdminApiHandlers"
 
 function EditEntry({ animal, close }: { animal: Animal; close: () => void }) {
   const [updatedAnimal, setUpdatedAnimal] = useState<Animal>(animal)
@@ -9,38 +10,11 @@ function EditEntry({ animal, close }: { animal: Animal; close: () => void }) {
   const queryClient = useQueryClient()
 
   const { mutate, error, isSuccess } = useMutation({
-    mutationFn: async (animalToCreate: Animal) => {
-      try {
-        const res = await axios.put(
-          `http://localhost:4444/api/pets/${animal._id}`,
-          animalToCreate
-        )
-        return res.data
-      } catch (err) {
-        if (err instanceof Error) {
-          throw new Error(err.message)
-        } else {
-          throw new Error("An unknown error occurred")
-        }
-      }
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["petsListAdmin"] })
-      setTimeout(() => {
-        close()
-      }, 1234)
-    },
-    onError: () => {
-      queryClient.invalidateQueries({ queryKey: ["petsListAdmin"] })
-      setTimeout(() => {
-        close()
-      }, 1234)
-    },
+    mutationFn: (updatedAnimal: Animal) =>
+      editEntry(updatedAnimal, animal._id!),
+    onSuccess: () => afterHandlerHelper(queryClient, close),
+    onError: () => afterHandlerHelper(queryClient, close),
   })
-
-  const stopPropagation = (e: MouseEvent) => {
-    e.stopPropagation()
-  }
 
   return (
     <div
@@ -50,7 +24,7 @@ function EditEntry({ animal, close }: { animal: Animal; close: () => void }) {
       {!isSuccess && !error ? (
         <div
           className="fixed bg-zinc-800 p-8 left-0 right-0 mx-auto w-fit top-10 rounded-lg"
-          onClick={stopPropagation}
+          onClick={() => stopPropagation}
         >
           <form
             onSubmit={(e) => {
@@ -174,7 +148,7 @@ function EditEntry({ animal, close }: { animal: Animal; close: () => void }) {
         </div>
       ) : isSuccess ? (
         <div
-          onClick={stopPropagation}
+          onClick={() => stopPropagation}
           className="fixed bg-zinc-800 p-8 left-0 right-0 mx-auto w-fit top-10 rounded-lg"
         >
           <p className="text-green-300">
@@ -183,7 +157,7 @@ function EditEntry({ animal, close }: { animal: Animal; close: () => void }) {
         </div>
       ) : (
         <div
-          onClick={stopPropagation}
+          onClick={() => stopPropagation}
           className="fixed bg-zinc-800 p-8 left-0 right-0 mx-auto w-fit top-10 rounded-lg"
         >
           <p className="text-red-300">Error: {error?.message}</p>

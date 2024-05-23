@@ -1,42 +1,17 @@
 import { Animal } from "../../types"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import axios from "axios"
+import { afterHandlerHelper, deleteEntry } from "../../utils/AdminApiHandlers"
+import { stopPropagation } from "../../utils/StopPropagation";
 
 function DeleteEntry({ animal, close }: { animal: Animal; close: () => void }) {
   const queryClient = useQueryClient()
 
   const { mutate, error, isSuccess } = useMutation({
-    mutationFn: async () => {
-      try {
-        const res = await axios.delete(
-          `http://localhost:4444/api/pets/${animal._id}`
-        )
-        return res.data
-      } catch (err) {
-        if (err instanceof Error) {
-          throw new Error(err.message)
-        } else {
-          throw new Error("An unknown error occurred")
-        }
-      }
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["petsListAdmin"] })
-      setTimeout(() => {
-        close()
-      }, 1234)
-    },
-    onError: () => {
-      queryClient.invalidateQueries({ queryKey: ["petsListAdmin"] })
-      setTimeout(() => {
-        close()
-      }, 1234)
-    },
+    mutationFn: () => deleteEntry(animal._id!),
+    onSuccess: () => () => afterHandlerHelper(queryClient, close),
+    onError: () => afterHandlerHelper(queryClient, close),
   })
 
-  const stopPropagation = (e: React.MouseEvent) => {
-    e.stopPropagation()
-  }
 
   return (
     <div
@@ -46,7 +21,7 @@ function DeleteEntry({ animal, close }: { animal: Animal; close: () => void }) {
       {!isSuccess && !error ? (
         <div
           className="fixed bg-zinc-800 p-8 left-0 right-0 mx-auto w-fit top-10"
-          onClick={stopPropagation}
+          onClick={() => stopPropagation}
         >
           <form
             onSubmit={async (e) => {
@@ -83,14 +58,14 @@ function DeleteEntry({ animal, close }: { animal: Animal; close: () => void }) {
         </div>
       ) : isSuccess ? (
         <div
-          onClick={stopPropagation}
+          onClick={() => stopPropagation}
           className="fixed bg-zinc-800 p-8 left-0 right-0 mx-auto w-fit top-10 rounded-lg"
         >
           <p className="text-green-300">The deletion was succesful!</p>
         </div>
       ) : (
         <div
-          onClick={stopPropagation}
+          onClick={() => stopPropagation}
           className="fixed bg-zinc-800 p-8 left-0 right-0 mx-auto w-fit top-10 rounded-lg"
         >
           <p className="text-red-300">Error: {error.message}</p>

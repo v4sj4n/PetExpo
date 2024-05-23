@@ -5,7 +5,7 @@ import DeleteEntry from "../components/AdminComponents/DeleteEntry"
 import EditEntry from "../components/AdminComponents/EditEntry"
 import CreateEntry from "../components/AdminComponents/CreateEntry"
 import { useQuery } from "@tanstack/react-query"
-import axios from "axios"
+import { adminQueryKey, readEntries } from "../utils/AdminApiHandlers"
 
 function Admin() {
   const [animalArray, setAnimalArray] = useState<Animal[]>([])
@@ -31,12 +31,8 @@ function Admin() {
   }, [width])
 
   const { isLoading, error } = useQuery({
-    queryFn: async () => {
-      const res = await axios.get("http://localhost:4444/api/pets")
-      setAnimalArray(res.data)
-      return res.data
-    },
-    queryKey: ["petsListAdmin"],
+    queryFn: () => readEntries(setAnimalArray),
+    queryKey: adminQueryKey,
   })
 
   useEffect(() => {
