@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tanstack/react-table": "^8.17.3",
+    "axios": "^1.7.2",
     "framer-motion": "^11.2.4",
     "leaflet": "^1.9.4",
     "react": "^18.2.0",
@@ -19,6 +21,8 @@
     "react-router-dom": "^6.23.1"
   },
   "devDependencies": {
+    "@tanstack/react-query": "^5.37.1",
+    "@tanstack/react-query-devtools": "^5.37.1",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "@typescript-eslint/eslint-plugin": "^7.2.0",

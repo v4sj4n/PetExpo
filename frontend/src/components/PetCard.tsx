@@ -6,9 +6,11 @@ import { Animal } from "../types"
 export const PetCard = ({
   animal,
   animalType,
+  index
 }: {
   animal: Animal
   animalType: string
+  index: number
 }) => {
   const [showFullCard, setShowFullCard] = useState(false)
 
@@ -26,7 +28,11 @@ export const PetCard = ({
     }
   }, [])
   return (
-    <motion.div className="rounded-xl overflow-hidden">
+    <motion.div
+    initial={{ scale: 0, y: 100, opacity: 0 }}
+    animate={{ scale: 1, y: 0, opacity: 1 }}
+    transition={{ duration: 0.5, delay: index * 0.05 }}
+    className="rounded-xl overflow-hidden">
       <img
         src={`${animal.image}?q=10`}
         alt={`${animal.name} image`}

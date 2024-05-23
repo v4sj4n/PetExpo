@@ -1,5 +1,5 @@
 export type Animal = {
-  _id: string
+  _id?: string
   name: string
   image: string
   description: string

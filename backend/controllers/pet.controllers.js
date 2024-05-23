@@ -9,19 +9,39 @@ const getPets = async (req, res) => {
     "origin",
     "colors",
     "category",
+    "search",
   ]
-
   try {
     if (queries) {
       const isValid = Object.keys(queries).every((key) =>
         validKeys.includes(key)
       )
+
       if (!isValid) {
         return res.status(400).json({ message: "Invalid query parameter" })
       }
+
+      if (queries.search && queries.search.length > 0) {
+        if (queries.category.length > 0) {
+          const pets = await Pet.find({
+            name: { $regex: queries.search },
+            category: queries.category,
+          }).select("-__v")
+          console.log(pets)
+          return res.status(200).json(pets)
+        }
+
+        const pets = await Pet.find({
+          name: { $regex: queries.search },
+        }).select("-__v")
+
+        return res.status(200).json(pets)
+      }
+
       const pets = await Pet.find(queries).select("-__v")
       return res.status(200).json(pets)
     }
+
     const pets = await Pet.find({}).select("-__v")
     res.status(200).json(pets)
   } catch (err) {
@@ -34,7 +54,7 @@ const getPet = async (req, res) => {
     const { id } = await req.params
     const pet = await Pet.findById(id).select("-__v")
     res.status(200).json(pet)
-  } catch {
+  } catch (err) {
     res.status(500).json({ message: err.message })
   }
 }

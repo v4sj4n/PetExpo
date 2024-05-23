@@ -4,11 +4,11 @@ import { useEffect } from "react"
 import DeleteEntry from "../components/AdminComponents/DeleteEntry"
 import EditEntry from "../components/AdminComponents/EditEntry"
 import CreateEntry from "../components/AdminComponents/CreateEntry"
+import { useQuery } from "@tanstack/react-query"
+import axios from "axios"
 
 function Admin() {
   const [animalArray, setAnimalArray] = useState<Animal[]>([])
-  const [loading, setLoading] = useState<boolean>(true)
-  const [error, setError] = useState<string | null>(null)
   const [sortField, setSortField] = useState<string | null>(null)
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc")
   const [activateDelete, setActivateDelete] = useState<boolean>(false)
@@ -30,24 +30,18 @@ function Admin() {
     }
   }, [width])
 
-  useEffect(() => {
-    const fetchPetCategory = async () => {
-      try {
-        const res = await fetch(`http://localhost:4444/api/pets/`)
-        const data = await res.json()
-        setAnimalArray(data)
-        setLoading(false)
-      } catch (err) {
-        setError("Error fetching data")
-        setLoading(false)
-      }
-    }
-    fetchPetCategory()
-  }, [])
+  const { isLoading, error } = useQuery({
+    queryFn: async () => {
+      const res = await axios.get("http://localhost:4444/api/pets")
+      setAnimalArray(res.data)
+      return res.data
+    },
+    queryKey: ["petsListAdmin"],
+  })
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
+      if (event.key === "Escape") {
         setActivateDelete(false)
         setActivateEdit(false)
         setActivateCreate(false)
@@ -55,11 +49,10 @@ function Admin() {
       }
     }
 
-    document.addEventListener('keydown', handleKeyDown)
+    document.addEventListener("keydown", handleKeyDown)
 
-    // Clean up the event listener when the component unmounts
     return () => {
-      document.removeEventListener('keydown', handleKeyDown)
+      document.removeEventListener("keydown", handleKeyDown)
     }
   }, [])
 
@@ -71,8 +64,9 @@ function Admin() {
 
     const sortedArray = [...animalArray].sort((a, b) => {
       const key = field as keyof Animal
-
+      //@ts-expect-error 123
       if (a[key] < b[key]) return direction === "asc" ? -1 : 1
+      //@ts-expect-error 123
       if (a[key] > b[key]) return direction === "asc" ? 1 : -1
       return 0
     })
@@ -80,7 +74,7 @@ function Admin() {
     setAnimalArray(sortedArray)
   }
 
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="text-4xl text-white text-center my-10 uppercase">
         Loading...
@@ -90,7 +84,7 @@ function Admin() {
   if (error) {
     return (
       <div className="text-4xl text-white text-center my-10 uppercase">
-        {error}
+        {error.message}
       </div>
     )
   }
