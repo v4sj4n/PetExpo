@@ -81,24 +81,18 @@ export default function PetCategory() {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-8 w-3/4 mx-auto">
         {search === ""
           ? animalArray.map((animal: Animal, index: number) => (
-              <motion.div
-                key={animal.id}
-                initial={{ scale: 0, y: 100, opacity: 0 }}
-                animate={{ scale: 1, y: 0, opacity: 1 }}
-                transition={{ duration: 0.5, delay: index * 0.05 }}
-              >
-                <PetCard animal={animal} animalType={petCategory!} />
-              </motion.div>
+              <PetCard
+                index={index}
+                animal={animal}
+                animalType={petCategory!}
+              />
             ))
           : filteredAnimalArray.map((animal: Animal, index: number) => (
-              <motion.div
-                key={animal.id}
-                initial={{ scale: 0.5, y: 50, opacity: 0 }}
-                animate={{ scale: 1, y: 0, opacity: 1 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-              >
-                <PetCard animal={animal} animalType={petCategory!} />
-              </motion.div>
+              <PetCard
+                index={index}
+                animal={animal}
+                animalType={petCategory!}
+              />
             ))}
       </div>
     </div>
