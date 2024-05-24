@@ -3,7 +3,7 @@ import { LuDog, LuCat, LuBird } from "react-icons/lu"
 import { motion, useMotionValueEvent, useScroll } from "framer-motion"
 import { IsDropdownClickedContext } from "../context/IsDropdownClicked"
 import { useContext } from "react"
-import { Link } from "react-router-dom"
+import { Link } from "@tanstack/react-router"
 
 export const Navbar = () => {
   const { isClicked, toggleClick, isHidden, hide, show } = useContext(
@@ -63,7 +63,8 @@ export const Navbar = () => {
               <li>
                 <Link
                   className="flex items-center gap-2 text-lg"
-                  to="/pets/dogs"
+                  to="/pets/$petCategory"
+                  params={{ petCategory: "dogs" }}
                 >
                   <LuDog width={20} />
                   Dogs
@@ -72,7 +73,8 @@ export const Navbar = () => {
               <li>
                 <Link
                   className="flex items-center gap-2 text-lg"
-                  to="/pets/cats"
+                  to="/pets/$petCategory"
+                  params={{ petCategory: "cats" }}
                 >
                   <LuCat width={20} />
                   Cats
@@ -81,7 +83,8 @@ export const Navbar = () => {
               <li>
                 <Link
                   className="flex items-center gap-2 text-lg"
-                  to="/pets/birds"
+                  to="/pets/$petCategory"
+                  params={{ petCategory: "birds" }}
                 >
                   <LuBird width={20} />
                   Birds

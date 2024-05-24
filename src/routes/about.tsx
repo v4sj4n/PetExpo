@@ -1,5 +1,10 @@
+import { createFileRoute } from "@tanstack/react-router"
 import MapComponent from "../components/MapComponent"
 import { MdEmail, MdLocalPhone, MdLocationPin } from "react-icons/md"
+
+export const Route = createFileRoute("/about")({
+  component: About,
+})
 
 function About() {
   const detailsStyles = "text-white flex gap-2 items-center"
@@ -32,4 +37,3 @@ function About() {
   )
 }
 
-export default About

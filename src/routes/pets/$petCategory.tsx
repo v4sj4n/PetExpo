@@ -1,14 +1,18 @@
+import { createFileRoute } from "@tanstack/react-router"
 import { useContext, useState } from "react"
-import { useParams } from "react-router-dom"
-import { PetCard } from "../components/PetCard"
-import { Animal } from "../types"
-import { IsDropdownClickedContext } from "../context/IsDropdownClicked"
+import { PetCard } from "../../components/PetCard"
+import { Animal } from "../../types"
+import { IsDropdownClickedContext } from "../../context/IsDropdownClicked"
 import { useQuery } from "@tanstack/react-query"
-import { useDebounce } from "../utils/useDebounce"
+import { useDebounce } from "../../utils/useDebounce"
+
+export const Route = createFileRoute("/pets/$petCategory")({
+  component: PetCategory,
+})
 
 export default function PetCategory() {
+  const { petCategory } = Route.useParams()
   const { isClicked, isHidden } = useContext(IsDropdownClickedContext)
-  const { petCategory } = useParams()
   const [search, setSearch] = useState<string>("")
   const debouncedSearch = useDebounce(search)
 

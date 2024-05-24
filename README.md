@@ -4,7 +4,7 @@ This is a simple frontend project for a shop called PetExpo, the site displays i
 
 ## The frontend is done in React it uses other dependencies like:
 
-- **react-router-dom** for creating routes
+- **@tanstack/react-router** for creating routes
 - **tailwindcss** for styling
 - **react-icons** for different icons needed in the site
 - **framer-motion** for animations
