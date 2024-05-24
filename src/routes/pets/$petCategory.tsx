@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router"
+import { createFileRoute, notFound } from "@tanstack/react-router"
 import { useContext, useState } from "react"
 import { PetCard } from "../../components/PetCard"
 import { Animal } from "../../types"
@@ -8,6 +8,11 @@ import { useDebounce } from "../../utils/useDebounce"
 
 export const Route = createFileRoute("/pets/$petCategory")({
   component: PetCategory,
+  loader: async ({ params }) => {
+    if (!["dogs", "cats", "birds"].includes(params.petCategory)) {
+      throw notFound()
+    }
+  },
 })
 
 export default function PetCategory() {
