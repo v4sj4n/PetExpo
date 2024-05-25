@@ -2,13 +2,15 @@ import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io"
 import { LuDog, LuCat, LuBird } from "react-icons/lu"
 import { motion, useMotionValueEvent, useScroll } from "framer-motion"
 import { IsDropdownClickedContext } from "@/context/IsDropdownClicked"
-import { useContext } from "react"
+import { useContext, useEffect, useRef } from "react"
 import { Link } from "@tanstack/react-router"
 
 export const Navbar = () => {
   const { isClicked, toggleClick, isHidden, hide, show } = useContext(
     IsDropdownClickedContext
   )
+
+  const possibleAnimals = ["dogs", "cats", "birds"]
   const { scrollY } = useScroll()
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = scrollY.getPrevious()
@@ -25,6 +27,25 @@ export const Navbar = () => {
     }
   })
 
+  const dropdownRef = useRef<HTMLLIElement | null>(null)
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node) &&
+        isClicked
+      ) {
+        toggleClick()
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside)
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside)
+    }
+  }, [toggleClick, isClicked])
+
   return (
     <motion.nav
       variants={{
@@ -33,13 +54,13 @@ export const Navbar = () => {
       }}
       animate={isHidden ? "hidden" : "visible"}
       transition={{ duration: 0.35, ease: "easeInOut" }}
-      className="sticky top-0 h-16 bg-rose-100 flex justify-around items-center"
+      className="sticky top-0 h-16 bg-rose-200 flex justify-around items-center"
     >
       <Link to="/">
         <h3 className="text-2xl text-zinc-800 font-bold">PetExpo</h3>
       </Link>
       <ul className="flex items-center gap-2">
-        <li>
+        <li ref={dropdownRef}>
           <span
             className="flex items-center cursor-pointer"
             onClick={toggleClick}
@@ -60,47 +81,37 @@ export const Navbar = () => {
             } bg-red-50 py-2 px-4 mr-2 rounded-md`}
           >
             <ul className="flex flex-col gap-2">
-              <li>
-                <Link
-                  className="flex items-center gap-2 text-lg"
-                  to="/pets/$petCategory"
-                  params={{ petCategory: "dogs" }}
-                  activeProps={{className: "font-bold"}}
-                >
-                  <LuDog width={20} />
-                  Dogs
-                </Link>
-              </li>
-              <li>
-                <Link
-                  className="flex items-center gap-2 text-lg"
-                  to="/pets/$petCategory"
-                  params={{ petCategory: "cats" }}
-                  activeProps={{className: "font-bold"}}
-                >
-                  <LuCat width={20} />
-                  Cats
-                </Link>
-              </li>
-              <li>
-                <Link
-                  className="flex items-center gap-2 text-lg"
-                  to="/pets/$petCategory"
-                  params={{ petCategory: "birds" }}
-                  activeProps={{className: "font-bold"}}
-                >
-                  <LuBird width={20} />
-                  Birds
-                </Link>
-              </li>
+              {possibleAnimals.map((animal) => (
+                <li key={animal}>
+                  <Link
+                    className="flex items-center gap-2 text-lg"
+                    to="/pets/$petCategory"
+                    params={{ petCategory: animal }}
+                    activeProps={{ className: "font-bold" }}
+                  >
+                    {animal === "dogs" ? (
+                      <LuDog width={20} />
+                    ) : animal === "cats" ? (
+                      <LuCat width={20} />
+                    ) : (
+                      <LuBird width={20} />
+                    )}
+                    {animal}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </motion.div>
         </li>
         <li>
-          <Link to="/contact" activeProps={{className: "font-bold"}}>contact</Link>
+          <Link to="/contact" activeProps={{ className: "font-bold" }}>
+            contact
+          </Link>
         </li>
         <li>
-          <Link to="/about" activeProps={{className: "font-bold"}}>about</Link>
+          <Link to="/about" activeProps={{ className: "font-bold" }}>
+            about
+          </Link>
         </li>
       </ul>
     </motion.nav>

@@ -21,6 +21,9 @@ export default function PetCategory() {
   const [search, setSearch] = useState<string>("")
   const debouncedSearch = useDebounce(search)
 
+  const inputStyles =
+    "left-0 right-0 sticky  mx-auto p-3 block mb-8 w-full md:w-2/4 rounded-md shadow-md border-white/25 border-2 bg-zinc-800 text-white"
+
   const {
     data: animalArray,
     isLoading,
@@ -64,7 +67,7 @@ export default function PetCategory() {
         type="text"
         className={`${
           isClicked && !isHidden ? "top-44" : !isHidden ? "top-20" : "top-4"
-        } left-0 right-0 sticky  mx-auto p-3 block mb-8 w-full md:w-2/4 rounded-md shadow-md border-white/25 border-2  bg-zinc-800 text-white "`}
+        } ${inputStyles} `}
         placeholder={`Search through the ${petCategory} list`}
         onChange={(e) => {
           setSearch(e.target.value)

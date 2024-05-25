@@ -26,6 +26,8 @@ export const PetCard = ({
       document.removeEventListener("keydown", handleKeyDown)
     }
   }, [])
+
+
   return (
     <motion.div
       initial={{ scale: 0, y: 100, opacity: 0 }}
@@ -44,12 +46,16 @@ export const PetCard = ({
         alt=""
         className=""
       />
-      <div className="flex justify-between items-center">
-        <p className="text-white text-2xl">{animal.name}</p>
-        {animalType !== "birds" ? (
-          <span className="text-white/60">{animal.origin}</span>
+      <div className="flex justify-between gap-2 items-center">
+        {animal.name.split(" ").length > 1 ? (
+          <p className="text-white text-ellipsis overflow-hidden text-lg">{animal.name}</p>
         ) : (
-          <span className="text-white/60">{animal.place_of_found}</span>
+          <p className="text-white text-2xl">{animal.name}</p>
+        )}
+        {animalType !== "birds" ? (
+          <span className="text-white/60 text-ellipsis overflow-hidden">{animal.origin}</span>
+        ) : (
+          <span className="text-white/60 truncate overflow-hidden ">{animal.place_of_found}</span>
         )}
       </div>
       <a

@@ -9,7 +9,7 @@ export const Route = createFileRoute("/about")({
 function About() {
   const detailsStyles = "text-white flex gap-2 items-center"
   return (
-    <main className="flex flex-col items-center mt-20 md:w-4/5 mx-6 mb-16 md:mx-auto">
+    <main className="flex flex-col items-center mt-10 md:mt-20 md:w-4/5 mx-6 mb-16 md:mx-auto">
       <h1 className="flex text-balance items-center gap-2 flex-col md:flex-row md:gap-6 text-4xl text-center  md:text-5xl mb-8 text-zinc-100">
         About us
       </h1>
