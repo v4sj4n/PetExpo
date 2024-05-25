@@ -59,7 +59,7 @@ export default function PetCategory() {
   }
   return (
     <main className="flex flex-col items-center mt-4 md:w-3/4 mx-6 md:mx-auto">
-      <h1 className="text-4xl md:text-5xl text-center capitalize text-zinc-100 my-10">
+      <h1 className="text-4xl md:text-5xl font-bold text-center capitalize text-zinc-100 my-10">
         {petCategory}
       </h1>
 

@@ -62,7 +62,7 @@ export const Navbar = () => {
           PetExpo
         </h3>
       </Link>
-      <ul className="flex items-center gap-2">
+      <ul className="flex items-center justify-center gap-3">
         <li ref={dropdownRef}>
           <span
             className={`${location.pathname.startsWith("/pets") ? "font-bold" : ""} flex items-center cursor-pointer`}

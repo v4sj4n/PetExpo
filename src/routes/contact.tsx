@@ -7,7 +7,7 @@ export const Route = createFileRoute("/contact")({
 function Contact() {
   return (
     <main className="flex flex-col items-center mt-12 md:mt-20 md:w-3/4 mx-6 md:mx-auto">
-      <h1 className="text-4xl md:text-5xl text-center text-zinc-100 mb-3">
+      <h1 className="text-4xl md:text-5xl text-center font-bold text-zinc-100 mb-3">
         Got any questions?
       </h1>
       <p className=" text-lg text-center text-zinc-200/75 mb-8">let us know</p>

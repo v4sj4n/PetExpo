@@ -12,7 +12,7 @@ function Index() {
     "w-full p-8 bg-rose-200 hover:bg-rose-300 rounded-lg flex flex-col items-center justify-center"
   return (
     <main className="flex flex-col items-center md:mt-10 md:w-3/4 mx-6 md:mx-auto">
-      <h1 className="text-4xl md:text-5xl text-center text-zinc-100 mt-8 mb-6 flex gap-4 flex-col md:flex-row items-center justify-center">
+      <h1 className="text-4xl md:text-5xl font-bold text-center text-zinc-100 mt-8 mb-6 flex gap-4 flex-col md:flex-row items-center justify-center">
         Welcome to our pet universe
         <motion.div
           whileHover={{
