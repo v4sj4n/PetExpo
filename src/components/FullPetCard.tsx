@@ -8,7 +8,7 @@ import { FaTree, FaKiwiBird } from "react-icons/fa"
 import { GiForkKnifeSpoon } from "react-icons/gi"
 import { IoMdClock } from "react-icons/io"
 import { motion } from "framer-motion"
-import { Animal } from "../types"
+import { Animal } from "@/types"
 
 export const FullPetCard = ({
   animal,

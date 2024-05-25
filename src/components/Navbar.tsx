@@ -1,7 +1,7 @@
 import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io"
 import { LuDog, LuCat, LuBird } from "react-icons/lu"
 import { motion, useMotionValueEvent, useScroll } from "framer-motion"
-import { IsDropdownClickedContext } from "../context/IsDropdownClicked"
+import { IsDropdownClickedContext } from "@/context/IsDropdownClicked"
 import { useContext } from "react"
 import { Link } from "@tanstack/react-router"
 
@@ -65,6 +65,7 @@ export const Navbar = () => {
                   className="flex items-center gap-2 text-lg"
                   to="/pets/$petCategory"
                   params={{ petCategory: "dogs" }}
+                  activeProps={{className: "font-bold"}}
                 >
                   <LuDog width={20} />
                   Dogs
@@ -75,6 +76,7 @@ export const Navbar = () => {
                   className="flex items-center gap-2 text-lg"
                   to="/pets/$petCategory"
                   params={{ petCategory: "cats" }}
+                  activeProps={{className: "font-bold"}}
                 >
                   <LuCat width={20} />
                   Cats
@@ -85,6 +87,7 @@ export const Navbar = () => {
                   className="flex items-center gap-2 text-lg"
                   to="/pets/$petCategory"
                   params={{ petCategory: "birds" }}
+                  activeProps={{className: "font-bold"}}
                 >
                   <LuBird width={20} />
                   Birds
@@ -94,10 +97,10 @@ export const Navbar = () => {
           </motion.div>
         </li>
         <li>
-          <Link to="/contact">contact</Link>
+          <Link to="/contact" activeProps={{className: "font-bold"}}>contact</Link>
         </li>
         <li>
-          <Link to="/about">about</Link>
+          <Link to="/about" activeProps={{className: "font-bold"}}>about</Link>
         </li>
       </ul>
     </motion.nav>

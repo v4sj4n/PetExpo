@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import { FullPetCard } from "./FullPetCard"
-import { Animal } from "../types"
+import { Animal } from "@/types"
 
 export const PetCard = ({
   animal,
   animalType,
-  index
+  index,
 }: {
   animal: Animal
   animalType: string
@@ -28,17 +28,18 @@ export const PetCard = ({
   }, [])
   return (
     <motion.div
-    initial={{ scale: 0, y: 100, opacity: 0 }}
-    animate={{ scale: 1, y: 0, opacity: 1 }}
-    transition={{ duration: 0.5, delay: index * 0.05 }}
-    className="rounded-xl overflow-hidden">
+      initial={{ scale: 0, y: 100, opacity: 0 }}
+      animate={{ scale: 1, y: 0, opacity: 1 }}
+      transition={{ duration: 0.5, delay: index * 0.05 }}
+      className="rounded-xl overflow-hidden"
+    >
       <img
         src={`${
           animalType === "dogs"
             ? "/dog.png"
             : animalType === "cats"
-            ? "/cat.png"
-            : "/bird.png"
+              ? "/cat.png"
+              : "/bird.png"
         }`}
         alt=""
         className=""
