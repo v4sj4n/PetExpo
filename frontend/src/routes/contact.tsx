@@ -47,12 +47,11 @@ function Contact() {
           Pet:
           <select
             name="animaltype"
-            value={""}
             id=""
             className="rounded-md w-full px-2 py-1 border-white/25 border-2  bg-zinc-800 text-white"
             required
           >
-            <option value="" disabled>Select a pet</option>
+            <option value="" selected >Select a pet</option>
             <option value="dog">Dog</option>
             <option value="cat">Cat</option>
             <option value="bird">Bird</option>
