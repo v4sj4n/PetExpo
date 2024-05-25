@@ -1,11 +1,16 @@
+import { createFileRoute } from "@tanstack/react-router"
 import { useState } from "react"
-import { Animal } from "../types"
+import { Animal } from "@/types"
 import { useEffect } from "react"
-import DeleteEntry from "../components/AdminComponents/DeleteEntry"
-import EditEntry from "../components/AdminComponents/EditEntry"
-import CreateEntry from "../components/AdminComponents/CreateEntry"
+import DeleteEntry from "@/components/AdminComponents/DeleteEntry"
+import EditEntry from "@/components/AdminComponents/EditEntry"
+import CreateEntry from "@/components/AdminComponents/CreateEntry"
 import { useQuery } from "@tanstack/react-query"
-import { adminQueryKey, readEntries } from "../utils/AdminApiHandlers"
+import { adminQueryKey, readEntries } from "@/utils/AdminApiHandlers"
+
+export const Route = createFileRoute("/admin")({
+  component: Admin,
+})
 
 function Admin() {
   const [animalArray, setAnimalArray] = useState<Animal[]>([])
@@ -33,6 +38,7 @@ function Admin() {
   const { isLoading, error } = useQuery({
     queryFn: () => readEntries(setAnimalArray),
     queryKey: adminQueryKey,
+    refetchInterval: 5000,
   })
 
   useEffect(() => {
@@ -87,7 +93,7 @@ function Admin() {
 
   return (
     <main className="flex flex-col items-center mt-10 md:mt-12 md:w-3/4 mx-6 md:mx-auto">
-      <h1 className="flex text-balance items-center gap-2 flex-col md:flex-row md:gap-6 text-4xl text-center  md:text-5xl mb-8 text-rose-200">
+      <h1 className="flex text-balance items-center gap-2 flex-col md:flex-row md:gap-6 text-4xl text-center font-bold md:text-5xl mb-8 text-rose-200">
         Admin Page
       </h1>
 
@@ -95,7 +101,7 @@ function Admin() {
         onClick={() => {
           setActivateCreate(true)
         }}
-        className="text-white px-4 py-2 rounded-md border mb-4 hover:bg-rose-200 hover:text-black"
+        className="text-white px-4 py-2 rounded-md border mb-6 hover:bg-rose-200 hover:text-black"
       >
         Create a pet entry
       </button>
@@ -127,7 +133,7 @@ function Admin() {
       )}
 
       {width > 700 ? (
-        <table className="border-2 rounded-lg w-full ">
+        <table className="border-2 rounded-lg w-full mb-14">
           <thead className="text-white text-2xl">
             <tr>
               <th>
@@ -180,7 +186,7 @@ function Admin() {
           </tbody>
         </table>
       ) : width >= 500 ? (
-        <table className="border-2 rounded-lg w-full ">
+        <table className="border-2 rounded-lg w-full mb-14">
           <thead className="text-white text-2xl">
             <tr>
               <th>
@@ -231,7 +237,7 @@ function Admin() {
           </tbody>
         </table>
       ) : (
-        <table className="border-2 rounded-lg w-full ">
+        <table className="border-2 rounded-lg w-full mb-14 ">
           <thead className="text-white text-2xl">
             <tr>
               <th>
@@ -248,7 +254,7 @@ function Admin() {
               return (
                 <tr key={animal._id}>
                   <td className="text-center text-sm">{animal.name}</td>
-                  <td className="text-center ">{animal.category}</td>
+                  <td className="text-center">{animal.category}</td>
                   <td>
                     <div className="flex justify-center">
                       <button
@@ -281,5 +287,3 @@ function Admin() {
     </main>
   )
 }
-
-export default Admin

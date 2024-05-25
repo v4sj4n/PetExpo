@@ -1,8 +1,6 @@
 import { MdClose, MdOutlineInvertColors, MdLocationPin } from "react-icons/md"
-
 import { motion } from "framer-motion"
 import { Animal } from "../types"
-import { stopPropagation } from "../utils/StopPropagation"
 
 export const FullPetCard = ({
   animal,
@@ -22,7 +20,7 @@ export const FullPetCard = ({
     >
       <div
         className="fixed z-50  rounded-xl bg-zinc-800 md:w-4/12 top-20 left-0 right-0 md:mx-auto pt-4 pb-6 px-6 mx-4"
-        onClick={() => stopPropagation}
+        onClick={(e) => e.stopPropagation()}
       >
         <div className="flex justify-end items-center text-2xl mb-2 text-white">
           <MdClose className="cursor-pointer" onClick={closeCard} />

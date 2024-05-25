@@ -5,7 +5,7 @@ psst if you are an admin you can add remove update or see the pets being display
 
 ## The frontend is done in React it uses other dependencies like:
 
-- **react-router-dom** for creating routes
+- **@tanstack/query** for creating routes
 - **tailwindcss** for styling
 - **react-icons** for different icons needed in the site
 - **framer-motion** for animations

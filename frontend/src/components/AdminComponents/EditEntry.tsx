@@ -1,8 +1,7 @@
 import { useState } from "react"
-import { Animal } from "../../types"
+import { Animal } from "@/types"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { stopPropagation } from "../../utils/StopPropagation"
-import { afterHandlerHelper, editEntry } from "../../utils/AdminApiHandlers"
+import { afterHandlerHelper, editEntry } from "@/utils/AdminApiHandlers"
 
 function EditEntry({ animal, close }: { animal: Animal; close: () => void }) {
   const [updatedAnimal, setUpdatedAnimal] = useState<Animal>(animal)
@@ -21,11 +20,11 @@ function EditEntry({ animal, close }: { animal: Animal; close: () => void }) {
       className="fixed top-0 left-0  bg-black/10 backdrop-blur-sm grid  h-full w-full "
       onClick={close}
     >
-      {!isSuccess && !error ? (
-        <div
-          className="fixed bg-zinc-800 p-8 left-0 right-0 mx-auto w-fit top-10 rounded-lg"
-          onClick={() => stopPropagation}
-        >
+      <div
+        className="fixed bg-zinc-800 p-8 left-0 right-0 mx-auto w-fit top-10 rounded-lg"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {!isSuccess && !error ? (
           <form
             onSubmit={(e) => {
               e.preventDefault()
@@ -33,11 +32,13 @@ function EditEntry({ animal, close }: { animal: Animal; close: () => void }) {
             }}
           >
             <div className="flex flex-col gap-4">
-              <h1 className="text-2xl text-white">Edit your pet:</h1>
+              <h1 className="text-3xl mb-2 font-bold text-white">
+                Edit your pet:
+              </h1>
               <img
                 src={`${animal.image}?q=10`}
                 alt={`${animal.name} image`}
-                className="size-40 object-cover mx-auto"
+                className="size-40 object-cover "
               />
               <div className="grid grid-cols-2 gap-2">
                 <label htmlFor="name">
@@ -46,6 +47,8 @@ function EditEntry({ animal, close }: { animal: Animal; close: () => void }) {
                     type="text"
                     id="name"
                     name="name"
+                    placeholder="Enter your pet name"
+                    required
                     value={updatedAnimal.name}
                     onChange={(e) => {
                       setUpdatedAnimal({
@@ -53,7 +56,7 @@ function EditEntry({ animal, close }: { animal: Animal; close: () => void }) {
                         name: e.target.value,
                       })
                     }}
-                    className="w-full rounded-md p-2"
+                    className="w-full rounded-md p-2 border-white/25 border-2  bg-zinc-800 text-white"
                   />
                 </label>
                 <label htmlFor="origin">
@@ -62,6 +65,8 @@ function EditEntry({ animal, close }: { animal: Animal; close: () => void }) {
                     type="text"
                     id="name"
                     name="name"
+                    placeholder="Enter your pet origin"
+                    required
                     value={updatedAnimal.origin}
                     onChange={(e) => {
                       setUpdatedAnimal({
@@ -69,7 +74,7 @@ function EditEntry({ animal, close }: { animal: Animal; close: () => void }) {
                         origin: e.target.value,
                       })
                     }}
-                    className="w-full rounded-md p-2"
+                    className="w-full rounded-md p-2 border-white/25 border-2  bg-zinc-800 text-white"
                   />
                 </label>
                 <label htmlFor="desc" className="col-span-2">
@@ -78,7 +83,10 @@ function EditEntry({ animal, close }: { animal: Animal; close: () => void }) {
                   <textarea
                     name="description"
                     id="description"
-                    className=" rounded-md p-2  w-full resize-none leading-5"
+                    className=" rounded-md p-2  w-full resize-none leading-5 border-white/25 border-2  bg-zinc-800 text-white"
+                    rows={3}
+                    required
+                    placeholder="Enter your pet description"
                     value={updatedAnimal.description}
                     onChange={(e) => {
                       setUpdatedAnimal({
@@ -89,13 +97,15 @@ function EditEntry({ animal, close }: { animal: Animal; close: () => void }) {
                   ></textarea>
                 </label>
                 <label htmlFor="colors" className="col-span-2">
-                  <span className="text-xl text-white">Colors:</span>
-                  <span>seperate by commas</span>
+                  <span className="text-xl text-white">Colors: </span>
+                  <span className="text-white text-xs">seperate by commas</span>
                   <input
                     type="text"
                     id="colors"
                     name="colors"
                     value={updatedAnimal.colors.join(", ")}
+                    placeholder="Enter your pet colors"
+                    required
                     onChange={(e) => {
                       setUpdatedAnimal({
                         ...updatedAnimal,
@@ -104,24 +114,27 @@ function EditEntry({ animal, close }: { animal: Animal; close: () => void }) {
                           .map((color) => color.trim()),
                       })
                     }}
-                    className="w-full rounded-md p-2"
+                    className="w-full rounded-md p-2 border-white/25 border-2  bg-zinc-800 text-white"
                   />
                 </label>
                 <label htmlFor="petCategory" className="col-span-2">
                   <span className="text-xl text-white">Pet:</span>
-
                   <select
                     name="pet"
                     id="pet"
-                    defaultValue={animal.category}
+                    value={animal.category || ""}
+                    required
                     onChange={(e) => {
                       setUpdatedAnimal({
                         ...updatedAnimal,
                         category: e.target.value,
                       })
                     }}
-                    className="w-full p-2 rounded-md"
+                    className="w-full p-2 rounded-md border-white/25 border-2  bg-zinc-800 text-white"
                   >
+                    <option value="" disabled>
+                      Select a pet
+                    </option>
                     <option value="dog">dog</option>
                     <option value="cat">cat</option>
                     <option value="bird">bird</option>
@@ -145,24 +158,14 @@ function EditEntry({ animal, close }: { animal: Animal; close: () => void }) {
               </div>
             </div>
           </form>
-        </div>
-      ) : isSuccess ? (
-        <div
-          onClick={() => stopPropagation}
-          className="fixed bg-zinc-800 p-8 left-0 right-0 mx-auto w-fit top-10 rounded-lg"
-        >
+        ) : isSuccess ? (
           <p className="text-green-300">
             The pet information update was succesful!
           </p>
-        </div>
-      ) : (
-        <div
-          onClick={() => stopPropagation}
-          className="fixed bg-zinc-800 p-8 left-0 right-0 mx-auto w-fit top-10 rounded-lg"
-        >
+        ) : (
           <p className="text-red-300">Error: {error?.message}</p>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   )
 }

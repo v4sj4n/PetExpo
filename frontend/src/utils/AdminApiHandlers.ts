@@ -1,6 +1,6 @@
 import { QueryClient } from "@tanstack/react-query"
 import axios from "axios"
-import { Animal } from "../types"
+import { Animal } from "@/types"
 
 export const adminQueryKey = ["petsListAdmin"]
 
