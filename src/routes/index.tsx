@@ -11,8 +11,8 @@ function Index() {
   const animalCategoryClass =
     "w-full p-8 bg-rose-200 hover:bg-rose-300 rounded-lg flex flex-col items-center justify-center"
   return (
-    <main className="flex flex-col items-center mt-10 md:w-3/4 mx-6 md:mx-auto">
-      <h1 className="flex text-balance items-center gap-2 flex-col md:flex-row md:gap-6 text-4xl text-center  md:text-5xl mb-6 text-zinc-100">
+    <main className="flex flex-col items-center md:mt-10 md:w-3/4 mx-6 md:mx-auto">
+      <h1 className="text-4xl md:text-5xl text-center text-zinc-100 mt-8 mb-6 flex gap-4 flex-col md:flex-row items-center justify-center">
         Welcome to our pet universe
         <motion.div
           whileHover={{
@@ -28,7 +28,7 @@ function Index() {
           <FaPaw className="rotate-[22.5deg]  text-rose-200 hover:text-rose-300" />
         </motion.div>
       </h1>
-      <p className=" text-lg text-center text-zinc-200/75 leading-6 mb-10">
+      <p className=" text-sm leading-5	 md:text-lg text-center text-zinc-200/75 md:leading-6 mb-10">
         Welcome to the pet world of your dreams, pick one of the categories
         below and start exploring your favorite pets with details and images.
       </p>

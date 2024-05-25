@@ -9,7 +9,7 @@ export const useDebounce = (search: string, delay: number = 500) => {
     }, delay)
 
     return () => clearTimeout(delaySearch)
-  }, [search])
+  }, [search, delay])
 
   return debouncedSearch
 }

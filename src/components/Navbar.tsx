@@ -58,12 +58,14 @@ export const Navbar = () => {
       className="sticky top-0 h-16 bg-rose-200 flex justify-around items-center"
     >
       <Link to="/">
-        <h3 className="text-2xl text-zinc-800 font-bold">PetExpo</h3>
+        <h3 className="text-2xl text-zinc-800 font-bold font-display">
+          PetExpo
+        </h3>
       </Link>
       <ul className="flex items-center gap-2">
         <li ref={dropdownRef}>
           <span
-            className="flex items-center cursor-pointer"
+            className={`${location.pathname.startsWith("/pets") ? "font-bold" : ""} flex items-center cursor-pointer`}
             onClick={toggleClick}
           >
             <button>pets</button>

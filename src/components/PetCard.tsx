@@ -27,7 +27,6 @@ export const PetCard = ({
     }
   }, [])
 
-
   return (
     <motion.div
       initial={{ scale: 0, y: 100, opacity: 0 }}
@@ -48,14 +47,20 @@ export const PetCard = ({
       />
       <div className="flex justify-between gap-2 items-center">
         {animal.name.split(" ").length > 1 ? (
-          <p className="text-white text-ellipsis overflow-hidden text-lg">{animal.name}</p>
+          <p className="text-white text-ellipsis overflow-hidden text-lg">
+            {animal.name}
+          </p>
         ) : (
           <p className="text-white text-2xl">{animal.name}</p>
         )}
         {animalType !== "birds" ? (
-          <span className="text-white/60 text-ellipsis overflow-hidden">{animal.origin}</span>
+          <span className="text-white/60 text-ellipsis overflow-hidden">
+            {animal.origin}
+          </span>
         ) : (
-          <span className="text-white/60 truncate overflow-hidden ">{animal.place_of_found}</span>
+          <span className="text-white/60 truncate overflow-hidden ">
+            {animal.place_of_found}
+          </span>
         )}
       </div>
       <a

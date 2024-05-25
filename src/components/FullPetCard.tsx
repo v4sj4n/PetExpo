@@ -34,7 +34,7 @@ export const FullPetCard = ({
       onClick={closeCard}
     >
       <div
-        className="fixed z-50  rounded-xl bg-zinc-800 md:w-4/12  top-10 md:top-20 left-0 right-0 md:mx-auto pt-4 pb-6 px-6 mx-4 border-rose-300/50 border-2"
+        className="fixed z-50  rounded-xl bg-zinc-800 md:w-4/12 top-8 md:top-20 left-0 right-0 md:mx-auto pt-4 pb-6 px-6 mx-4 border-rose-300/50 border-2"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex justify-end items-center text-2xl mb-2 text-white">
@@ -58,7 +58,7 @@ export const FullPetCard = ({
             </h3>
           </div>
           <div className="space-y-2">
-            <p className="text-white/75 text-md text-balance">
+            <p className="text-white/75 text-sm md:text-md text-balance">
               {animal.description}{" "}
               {animal.origin && animalType === "dogs" ? (
                 <>

@@ -14,7 +14,6 @@ const IsDropdownProvider = ({ children }: { children: ReactNode }) => {
   const [isClicked, setIsClicked] = useState(false)
   const [isHidden, setHidden] = useState(false)
 
-
   const toggleClick = () => {
     setIsClicked((prevState) => !prevState)
   }
@@ -26,7 +25,9 @@ const IsDropdownProvider = ({ children }: { children: ReactNode }) => {
   }
 
   return (
-    <IsDropdownClickedContext.Provider value={{ isClicked, toggleClick, isHidden, hide, show }}>
+    <IsDropdownClickedContext.Provider
+      value={{ isClicked, toggleClick, isHidden, hide, show }}
+    >
       {children}
     </IsDropdownClickedContext.Provider>
   )
