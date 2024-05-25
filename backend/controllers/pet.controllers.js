@@ -27,7 +27,6 @@ const getPets = async (req, res) => {
             name: { $regex: queries.search },
             category: queries.category,
           }).select("-__v")
-          console.log(pets)
           return res.status(200).json(pets)
         }
 

@@ -122,7 +122,7 @@ function EditEntry({ animal, close }: { animal: Animal; close: () => void }) {
                   <select
                     name="pet"
                     id="pet"
-                    value={animal.category || ""}
+                    value={updatedAnimal.category}
                     required
                     onChange={(e) => {
                       setUpdatedAnimal({
