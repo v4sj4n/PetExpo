@@ -3,7 +3,7 @@ import { LuDog, LuCat, LuBird } from "react-icons/lu"
 import { motion, useMotionValueEvent, useScroll } from "framer-motion"
 import { IsDropdownClickedContext } from "@/context/IsDropdownClicked"
 import { useContext, useEffect, useRef } from "react"
-import { Link } from "@tanstack/react-router"
+import { Link, useRouterState } from "@tanstack/react-router"
 
 export const Navbar = () => {
   const { isClicked, toggleClick, isHidden, hide, show } = useContext(
@@ -28,6 +28,7 @@ export const Navbar = () => {
   })
 
   const dropdownRef = useRef<HTMLLIElement | null>(null)
+  const { location } = useRouterState()
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
