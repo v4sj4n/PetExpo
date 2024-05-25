@@ -39,7 +39,7 @@ export default function PetCategory() {
       const data = await res.json()
       return data
     },
-    queryKey: ["pets", debouncedSearch],
+    queryKey: ["pets", debouncedSearch, petCategory],
     enabled: !!(debouncedSearch.length >= 0),
   })
 
