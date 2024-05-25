@@ -24,7 +24,7 @@ const getPets = async (req, res) => {
       if (queries.search && queries.search.length > 0) {
         if (queries.category.length > 0) {
           const pets = await Pet.find({
-            name: { $regex: queries.search },
+            name: { $regex: new RegExp(queries.search, "i") },
             category: queries.category,
           }).select("-__v")
           return res.status(200).json(pets)
