@@ -58,7 +58,7 @@ export const Navbar = () => {
       className="sticky top-0 h-16 bg-rose-200 flex justify-around items-center"
     >
       <Link to="/">
-        <h3 className="text-2xl text-zinc-800 font-bold font-display">
+        <h3 className="text-2xl text-zinc-800 font-bold font-display tracking-tighter">
           PetExpo
         </h3>
       </Link>

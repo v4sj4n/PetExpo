@@ -5,6 +5,7 @@ export const Route = createFileRoute("/contact")({
 })
 
 function Contact() {
+  document.title = "Pet Expo - Contact"
   return (
     <main className="flex flex-col items-center mt-12 md:mt-20 md:w-3/4 mx-6 md:mx-auto">
       <h1 className="text-4xl md:text-5xl text-center font-bold text-zinc-100 mb-3">

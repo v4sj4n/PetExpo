@@ -17,6 +17,8 @@ export const Route = createFileRoute("/pets/$petCategory")({
 
 export default function PetCategory() {
   const { petCategory } = Route.useParams()
+  document.title = `Pet Expo - ${petCategory.slice(0, 1).toUpperCase() + petCategory.slice(1)}`
+  
   const { isClicked, isHidden } = useContext(IsDropdownClickedContext)
   const [search, setSearch] = useState<string>("")
   const debouncedSearch = useDebounce(search)

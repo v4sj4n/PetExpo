@@ -7,6 +7,7 @@ export const Route = createFileRoute("/about")({
 })
 
 function About() {
+  document.title = "Pet Expo - About us"
   const detailsStyles = "text-white flex gap-2 items-center"
   return (
     <main className="flex flex-col items-center mt-10 md:mt-20 md:w-4/5 mx-6 mb-16 md:mx-auto">

@@ -8,6 +8,7 @@ export const Route = createFileRoute("/")({
 })
 
 function Index() {
+  document.title = "Pet Expo - Home"
   const animalCategoryClass =
     "w-full p-8 bg-rose-200 hover:bg-rose-300 rounded-lg flex flex-col items-center justify-center"
   return (
